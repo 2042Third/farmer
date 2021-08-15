@@ -10,7 +10,7 @@ SHOW GLOBAL VARIABLES LIKE 'local_infile';
 
 USE farmerdata;
 
-CREATE TABLE `airlines` (
+CREATE TABLE `farmers` (
   `id` INT NOT NULL,
   `name` VARCHAR(255) DEFAULT NULL,
   `website` VARCHAR(255) DEFAULT NULL,
@@ -71,12 +71,44 @@ CREATE TABLE `airlines` (
   `wildharvested` BOOLEAN DEFAULT NULL,
   `updateTime` VARCHAR(255) DEFAULT NULL
 );
-
+-- ["SET "+part1[i]+" = (@var"+str(i+1)+" = \'Y\');\n" for i in range(len(part1))]
 SET GLOBAL local_infile = 'ON';
 
-LOAD DATA INFILE 'c:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\airlines.dat' INTO TABLE airlines
+LOAD DATA INFILE './Export.csv' INTO TABLE airlines
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"'
-LINES TERMINATED BY '\n' (id, name, alt_name, iata, icao, callsign, country, @var3)
-SET active = (@var3 = 'Y');
+LINES TERMINATED BY '\n' (id, name,
+  website,facebook,twitter,youtube,othermedia,street,city,county,state,zip,season1date,season1time,season2date,season2time,season3date,season3time,season4date,season4time,x,y,location,credit,wic,wiccash,sfmnp,snap
+, @var1, @var2, @var3, @var4, @var5, @var6, @var7, @var8, @var9, @var10, @var11, @var12, @var13, @var14, @var15, @var16, @var17, @var18, @var19, @var20, @var21, @var22, @var23, @var24, @var25, @var26, @var27, @var28, @var29, @var30
+)
+SET organic = (@var1 = 'Y');
+SET bakedgoods = (@var2 = 'Y');
+SET cheese = (@var3 = 'Y');
+SET crafts = (@var4 = 'Y');
+SET flowers = (@var5 = 'Y');
+SET eggs = (@var6 = 'Y');
+SET seafood = (@var7 = 'Y');
+SET herbs = (@var8 = 'Y');
+SET vegetables = (@var9 = 'Y');
+SET honey = (@var10 = 'Y');
+SET jams = (@var11 = 'Y');
+SET maple = (@var12 = 'Y');
+SET meat = (@var13 = 'Y');
+SET nursery = (@var14 = 'Y');
+SET nuts = (@var15 = 'Y');
+SET plants = (@var16 = 'Y');
+SET poultry = (@var17 = 'Y');
+SET prepared = (@var18 = 'Y');
+SET soap = (@var19 = 'Y');
+SET trees = (@var20 = 'Y');
+SET wine = (@var21 = 'Y');
+SET coffee = (@var22 = 'Y');
+SET beans = (@var23 = 'Y');
+SET fruits = (@var24 = 'Y');
+SET grains = (@var25 = 'Y');
+SET juices = (@var26 = 'Y');
+SET mushrooms = (@var27 = 'Y');
+SET petfood = (@var28 = 'Y');
+SET tofu = (@var29 = 'Y');
+SET wildharvested = (@var30 = 'Y');
 SHOW WARNINGS;
-SELECT * FROM airlines;
+SELECT * FROM farmers;
