@@ -2,12 +2,82 @@ DROP DATABASE farmerdata;
 CREATE SCHEMA farmerdata;
 USE farmerdata;
 
-BULK INSERT farmers
-FROM 'Export.csv'
-WITH
-(
-    FIRSTROW = 2, -- as 1st one is header
-    FIELDTERMINATOR = ',',  --CSV field delimiter
-    ROWTERMINATOR = '\n',   --Use to shift the control to next row
-    TABLOCK
-)
+FLUSH privileges;
+
+SHOW GLOBAL VARIABLES LIKE 'local_infile';
+SET GLOBAL local_infile = 'ON';
+SHOW GLOBAL VARIABLES LIKE 'local_infile';
+
+USE farmerdata;
+
+CREATE TABLE `airlines` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(255) DEFAULT NULL,
+
+  `website` VARCHAR(255) DEFAULT NULL,
+  `facebook` VARCHAR(255) DEFAULT NULL,
+  `twitter` VARCHAR(255) DEFAULT NULL,
+  `youtube` VARCHAR(255) DEFAULT NULL, 
+  `otherMedia` VARCHAR(255) DEFAULT NULL,
+  `street` VARCHAR(255) DEFAULT NULL,
+  `city` VARCHAR(255) DEFAULT NULL,
+  `county` VARCHAR(255) DEFAULT NULL,
+  `state`  VARCHAR(255) DEFAULT NULL,
+  `zip` VARCHAR(255) DEFAULT NULL,
+  `season1Date` VARCHAR(255) DEFAULT NULL,
+  `season1Time` VARCHAR(255) DEFAULT NULL,
+  `season2Date` VARCHAR(255) DEFAULT NULL,
+  `season2Time` VARCHAR(255) DEFAULT NULL,
+  `season3Date` VARCHAR(255) DEFAULT NULL,
+  `season3Time` VARCHAR(255) DEFAULT NULL,
+  `season4Date` VARCHAR(255) DEFAULT NULL,
+  `season4Time` VARCHAR(255) DEFAULT NULL,
+  `x` INT NOT NULL,
+  `y` INT NOT NULL,
+  `location` VARCHAR(255) DEFAULT NULL ,
+  `credit` VARCHAR(255) DEFAULT NULL,
+  `WIC` VARCHAR(255) DEFAULT NULL,
+  `WICcash` VARCHAR(255) DEFAULT NULL,
+  `SFMNP` VARCHAR(255) DEFAULT NULL,
+  `SNAP`VARCHAR(255) DEFAULT NULL,
+  `organic`BOOLEAN DEFAULT NULL,
+  `bakedgoods`BOOLEAN DEFAULT NULL,
+  `cheese`BOOLEAN DEFAULT NULL,
+  `crafts`BOOLEAN DEFAULT NULL,
+  `flowers`BOOLEAN DEFAULT NULL,
+  `eggs` BOOLEAN DEFAULT NULL,
+  `Seafood` BOOLEAN DEFAULT NULL,
+  `Herbs` BOOLEAN DEFAULT NULL,
+  `Vegetables` BOOLEAN DEFAULT NULL,
+  `Honey` BOOLEAN DEFAULT NULL,
+  `Jams` BOOLEAN DEFAULT NULL,
+  `Maple` BOOLEAN DEFAULT NULL,
+  `Meat` BOOLEAN DEFAULT NULL,
+  `Nursery` BOOLEAN DEFAULT NULL,
+  `Nuts` BOOLEAN DEFAULT NULL,
+  `Plants` BOOLEAN DEFAULT NULL,
+  `Poultry` BOOLEAN DEFAULT NULL,
+  `Prepared` BOOLEAN DEFAULT NULL,
+  `Soap` BOOLEAN DEFAULT NULL,
+  `Trees` BOOLEAN DEFAULT NULL,
+  `Wine` BOOLEAN DEFAULT NULL,
+  `Coffee` BOOLEAN DEFAULT NULL,
+  `Beans` BOOLEAN DEFAULT NULL,
+  `Fruits` BOOLEAN DEFAULT NULL,
+  `Grains` BOOLEAN DEFAULT NULL,
+  `Juices` BOOLEAN DEFAULT NULL,
+  `Mushrooms` BOOLEAN DEFAULT NULL,
+  `PetFood` BOOLEAN DEFAULT NULL,
+  `Tofu` BOOLEAN DEFAULT NULL,
+  `WildHarvested` BOOLEAN DEFAULT NULL,
+  `updateTime` VARCHAR(255) DEFAULT NULL
+);
+
+SET GLOBAL local_infile = 'ON';
+
+LOAD DATA INFILE 'c:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\airlines.dat' INTO TABLE airlines
+FIELDS TERMINATED BY ',' ENCLOSED BY '\"'
+LINES TERMINATED BY '\n' (id, name, alt_name, iata, icao, callsign, country, @var3)
+SET active = (@var3 = 'Y');
+SHOW WARNINGS;
+SELECT * FROM airlines;
