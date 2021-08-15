@@ -4,9 +4,9 @@ USE farmerdata;
 
 FLUSH privileges;
 
-SHOW GLOBAL VARIABLES LIKE 'local_infile';
-SET GLOBAL local_infile = 'ON';
-SHOW GLOBAL VARIABLES LIKE 'local_infile';
+-- SHOW GLOBAL VARIABLES LIKE 'local_infile';
+-- SET GLOBAL local_infile = 'ON';
+-- SHOW GLOBAL VARIABLES LIKE 'local_infile';
 
 USE farmerdata;
 
@@ -74,7 +74,7 @@ CREATE TABLE `farmers` (
 -- ["SET "+part1[i]+" = (@var"+str(i+1)+" = \'Y\');\n" for i in range(len(part1))]
 SET GLOBAL local_infile = 'ON';
 
-LOAD DATA INFILE './Export.csv' INTO TABLE airlines
+LOAD DATA INFILE '/opt/tomcat/apache-tomcat-9.0.52/webapps/farmer/Export.csv' INTO TABLE airlines
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"'
 LINES TERMINATED BY '\n' (id, name,
   website,facebook,twitter,youtube,othermedia,street,city,county,state,zip,season1date,season1time,season2date,season2time,season3date,season3time,season4date,season4time,x,y,location,credit,wic,wiccash,sfmnp,snap
