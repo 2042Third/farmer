@@ -18,6 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 public class Farmer extends HttpServlet {
   private static final long serialVersionUID = 1L;
   public HelloUserGet a;
+  public String title_name = "<h1>Farmer Search</h1></br><h2>New search</h2>";
+  public StringBuffer resultTable = new StringBuffer(
+        "<table><tr><th>Name</th><th>City/County</th><th>State</th>" +
+        "<th>Reviews</th><th>website</th></tr>"
+        );
   public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
       Map<String, String> query_pairs = new LinkedHashMap<String, String>();
       String[] pairs = query.split("&");
@@ -43,12 +48,110 @@ public class Farmer extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
     response.getWriter().append("<html><title>Farmer search</title><body>" +
-        "<form method=\"POST\">Enter state:<br/><input name=\"state\" type=\"text\">" +
-        "<br/>Enter city:<br/><input name=\"city\" type=\"text\" size=\"60\">" +
-        "<br/><input type=\"submit\" value=\"Find\"></form>" +
-        "</body></html>");
+        title_name+
+        "<form >Enter state<input name=\"state\" type=\"text\">" +
+        "Enter city<input name=\"city\" type=\"text\" size=\"60\">" +
+        "<br/><input type=\"submit\" value=\"Find\"></form>" );
+    String state = "", city = "";
+    
+    String parameters = request.getQueryString();
+    if (parameters != null && !parameters.isEmpty()) {
+      Map<String,String> parameterMap = splitQuery(parameters);
+      if (parameterMap.containsKey("state")) {
+        state = parameterMap.get("state");
+      }
+      if (parameterMap.containsKey("city")) {
+        state = parameterMap.get("city");
+      }
+    }
+    get_from_sql(state, city, response);
+
+    //END
+    response.getWriter().append("</body></html>");
   }
 
+  /**
+   * Connects to the data base and search for the input,
+   * return the result to ResultSet
+   * @param state state
+   * @param city city
+   * @param response the response
+   * */
+  public void get_from_sql(String state, String city,HttpServletResponse response){
+      Preferences root  = Preferences.userRoot();
+      Preferences node = Preferences.userNodeForPackage(this.getClass());
+      String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
+
+
+      Connection con = null;
+      
+      try
+      {
+        con = DriverManager.getConnection(url, "admin", "f3ck");
+        String query = "SELECT name, website,city, county, state " + 
+                "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ?";
+        try (PreparedStatement stat = con.prepareStatement(query)) {
+          stat.setString(1, state+"%");
+          stat.setString(2, city+"%");
+          try (ResultSet rs = stat.executeQuery()) {
+            System.out.println("Executed the following SQL statement:");
+            System.out.println(query);
+            while (rs.next()) {
+              resultTable.append("<tr><td>").append(rs.getString(1)).
+                append("</td><td>").append(rs.getString("city")+", "+rs.getString("county")).
+                append("</td><td>").append(rs.getString("state")).
+                append("</td><td>").append("5/5").
+                append("</td><td>").append(rs.getString("website")).
+                append("</td></tr>");
+            }
+          }
+          resultTable.append("</table>");
+        }
+      }
+      catch (SQLException ex) {
+        for (Throwable t : ex)
+          System.out.println(t.getMessage());
+        System.out.println("Opening connection unsuccessful!");
+      }
+      finally {
+        node.put("MySQLConnection", url);
+        if (con != null) {
+          try {
+            con.close();
+          }
+          catch (SQLException ex) {
+            for (Throwable t : ex)
+              System.out.println(t.getMessage());
+            System.out.println("Closing connection unsuccessful!");
+          }
+        }
+      }
+          System.out.println("State is: " + state);
+      response.getWriter().append("<html><title>Airport Search Web App</title>" +
+          "<head><style>\r\n" + 
+          "table {\r\n" + 
+          "  font-family: arial, sans-serif;\r\n" + 
+          "  border-collapse: collapse;\r\n" + 
+          "  width: 100%;\r\n" + 
+          "}\r\n" + 
+          "\r\n" + 
+          "td, th {\r\n" + 
+          "  border: 1px solid #dddddd;\r\n" + 
+          "  text-align: left;\r\n" + 
+          "  padding: 8px;\r\n" + 
+          "}\r\n" + 
+          "\r\n" + 
+          "tr:nth-child(even) {\r\n" + 
+          "  background-color: #dddddd;\r\n" + 
+          "}\r\n" + 
+          "</style></head>" +
+          "<body>" +
+          "<H1>Search results for state: " + state +
+          " and city: " + city +
+          "</H1>" +
+          "" + resultTable.toString() );
+    }
+  }
 
 
   /**
@@ -91,10 +194,7 @@ public class Farmer extends HttpServlet {
 
 
     Connection con = null;
-    StringBuffer resultTable = new StringBuffer(
-        "<table><tr><th>Name</th><th>City/County</th><th>State</th>" +
-        "<th>Reviews</th><th>website</th></tr>"
-        );
+    
     try
     {
       con = DriverManager.getConnection(url, "admin", "f3ck");
