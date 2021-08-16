@@ -127,29 +127,34 @@ public class Farmer extends HttpServlet {
         }
       }
           System.out.println("State is: " + state);
-      response.getWriter().append("<html><title>Airport Search Web App</title>" +
-          "<head><style>\r\n" + 
-          "table {\r\n" + 
-          "  font-family: arial, sans-serif;\r\n" + 
-          "  border-collapse: collapse;\r\n" + 
-          "  width: 100%;\r\n" + 
-          "}\r\n" + 
-          "\r\n" + 
-          "td, th {\r\n" + 
-          "  border: 1px solid #dddddd;\r\n" + 
-          "  text-align: left;\r\n" + 
-          "  padding: 8px;\r\n" + 
-          "}\r\n" + 
-          "\r\n" + 
-          "tr:nth-child(even) {\r\n" + 
-          "  background-color: #dddddd;\r\n" + 
-          "}\r\n" + 
-          "</style></head>" +
-          "<body>" +
-          "<H1>Search results for state: " + state +
-          " and city: " + city +
-          "</H1>" +
-          "" + resultTable.toString() );
+        try{
+        response.getWriter().append("<html><title>Airport Search Web App</title>" +
+            "<head><style>\r\n" + 
+            "table {\r\n" + 
+            "  font-family: arial, sans-serif;\r\n" + 
+            "  border-collapse: collapse;\r\n" + 
+            "  width: 100%;\r\n" + 
+            "}\r\n" + 
+            "\r\n" + 
+            "td, th {\r\n" + 
+            "  border: 1px solid #dddddd;\r\n" + 
+            "  text-align: left;\r\n" + 
+            "  padding: 8px;\r\n" + 
+            "}\r\n" + 
+            "\r\n" + 
+            "tr:nth-child(even) {\r\n" + 
+            "  background-color: #dddddd;\r\n" + 
+            "}\r\n" + 
+            "</style></head>" +
+            "<body>" +
+            "<H1>Search results for state: " + state +
+            " and city: " + city +
+            "</H1>" +
+            "" + resultTable.toString() );
+      }
+      catch(Exception e){
+        Systemout.println("get writer fucked");
+      }
     }
   
 
