@@ -108,10 +108,10 @@ public class Farmer extends HttpServlet {
           System.out.println(query);
           while (rs.next()) {
             resultTable.append("<tr><td>").append(rs.getString(1)).
-              append("</td><td>").append(rs.getString("city")).
-              append("</td><td>").append(rs.getString(3)).
-              append("</td><td>").append(rs.getDouble(4)).
-              append("</td><td>").append(rs.getDouble(5)).
+              append("</td><td>").append(rs.getString("city")+", "+rs.getString("county")).
+              append("</td><td>").append(rs.getString("state")).
+              append("</td><td>").append("5/5").
+              append("</td><td>").append(rs.getString("website")).
               append("</td></tr>");
           }
         }
