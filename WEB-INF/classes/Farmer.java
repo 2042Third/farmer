@@ -43,7 +43,7 @@ public class Farmer extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
     response.getWriter().append("<html><title>Farmer search</title><body>" +
-        "<form method=\"POST\">Enter country:<br/><input name=\"country\" type=\"text\">" +
+        "<form method=\"POST\">Enter state:<br/><input name=\"state\" type=\"text\">" +
         "<br/>Enter city:<br/><input name=\"city\" type=\"text\" size=\"60\">" +
         "<br/><input type=\"submit\" value=\"Find\"></form>" +
         "</body></html>");
@@ -73,12 +73,12 @@ public class Farmer extends HttpServlet {
             s.close();
           }
         }
-        String country = "", city = "";
+        String state = "", city = "";
         if (!data.isEmpty()) {
       Map<String,String> parameterMap = splitQuery(data);
       System.out.println(data);
-      if (parameterMap.containsKey("country")) {
-        country = parameterMap.get("country");
+      if (parameterMap.containsKey("state")) {
+        state = parameterMap.get("state");
       }
       if (parameterMap.containsKey("city")) {
         city = parameterMap.get("city");
@@ -92,16 +92,16 @@ public class Farmer extends HttpServlet {
 
     Connection con = null;
     StringBuffer resultTable = new StringBuffer(
-        "<table><tr><th>Airport</th><th>City</th><th>Country</th>" +
-        "<th>Latitude</th><th>Longitude</th></tr>"
+        "<table><tr><th>Name</th><th>City/County</th><th>State</th>" +
+        "<th>Reviews</th><th>website</th></tr>"
         );
     try
     {
       con = DriverManager.getConnection(url, "admin", "f3ck");
-      String query = "SELECT airport, city, country, latitude, longitude " + 
-              "FROM advjava.airports WHERE country LIKE ? AND city LIKE ?";
+      String query = "SELECT name, website,city, county, state " + 
+              "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ?";
       try (PreparedStatement stat = con.prepareStatement(query)) {
-        stat.setString(1, country+"%");
+        stat.setString(1, state+"%");
         stat.setString(2, city+"%");
         try (ResultSet rs = stat.executeQuery()) {
           System.out.println("Executed the following SQL statement:");
@@ -136,7 +136,7 @@ public class Farmer extends HttpServlet {
         }
       }
     }
-        System.out.println("Country is: " + country);
+        System.out.println("State is: " + state);
     response.getWriter().append("<html><title>Airport Search Web App</title>" +
         "<head><style>\r\n" + 
         "table {\r\n" + 
@@ -156,7 +156,7 @@ public class Farmer extends HttpServlet {
         "}\r\n" + 
         "</style></head>" +
         "<body>" +
-        "<H1>Search results for country: " + country +
+        "<H1>Search results for state: " + state +
         " and city: " + city +
         "</H1>" +
         "" + resultTable.toString() + 
