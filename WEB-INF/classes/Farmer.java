@@ -86,7 +86,7 @@ public class Farmer extends HttpServlet {
     try{
 
       if(page <= 0)
-        response.getWriter().append("<button type=\"submit\"name=\"page\" value=0 size=\"90\" ><</button>");
+        response.getWriter().append("<button type=\"submit\"name=\"page\" value=0 size=\"90\" disabled><</button>");
       else
         response.getWriter().append("<button type=\"submit\"name=\"page\"  value="+(page-1)+" size=\"90\" ><</button>");
       response.getWriter().append(page+
