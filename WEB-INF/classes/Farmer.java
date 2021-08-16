@@ -72,7 +72,7 @@ public class Farmer extends HttpServlet {
       System.out.print("First enter");
     else
       get_from_sql(state, city, response);
-    get_pager(response);
+    get_pager(page, request,response);
     //END
     response.getWriter().append("</body></html>");
   }
