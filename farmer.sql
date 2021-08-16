@@ -39,7 +39,7 @@ CREATE TABLE `farmers` (
   `wiccash` VARCHAR(255) DEFAULT NULL,
   `sfmnp` VARCHAR(255) DEFAULT NULL,
   `snap`VARCHAR(255) DEFAULT NULL,
-  `organic` VARCHAR(3) DEFAULT 'N',
+    `organic` VARCHAR(3) DEFAULT 'N',
   `bakedgoods` VARCHAR(3) DEFAULT 'N',
   `cheese` VARCHAR(3) DEFAULT 'N',
   `crafts` VARCHAR(3) DEFAULT 'N',
