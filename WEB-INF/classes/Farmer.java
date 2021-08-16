@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Farmer")
 public class Farmer extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  
+  public HelloUserGet a;
   public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
       Map<String, String> query_pairs = new LinkedHashMap<String, String>();
       String[] pairs = query.split("&");
