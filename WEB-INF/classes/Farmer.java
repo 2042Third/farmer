@@ -47,11 +47,7 @@ public class Farmer extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
-    response.getWriter().append("<html><title>Farmer search</title><body>" +
-        title_name+
-        "<form >Enter state<input name=\"state\" type=\"text\">" +
-        "Enter city<input name=\"city\" type=\"text\" size=\"60\">" +
-        "<br/><input type=\"submit\" value=\"Find\"></form>" );
+    
     String state = "", city = "";
     
     String parameters = request.getQueryString();
@@ -64,6 +60,11 @@ public class Farmer extends HttpServlet {
         state = parameterMap.get("city");
       }
     }
+    response.getWriter().append("<html><title>Farmer search</title><body>" +
+        title_name+
+        "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
+        "Enter city<input name=\"city\" type=\"text\" size=\"60\" value=\""+city+"\">" +
+        "<br/><input type=\"submit\" value=\"Find\"></form>" );
     get_from_sql(state, city, response);
 
     //END
