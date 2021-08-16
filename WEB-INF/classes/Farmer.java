@@ -133,7 +133,7 @@ public class Farmer extends HttpServlet {
       }
           System.out.println("State is: " + state);
         try{
-        response.getWriter().append("<html><title>farmer Search Web App</title>" +
+        response.getWriter().append( 
             "<head><style>\r\n" + 
             "table {\r\n" + 
             "  font-family: arial, sans-serif;\r\n" + 
