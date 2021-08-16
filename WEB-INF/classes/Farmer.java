@@ -80,7 +80,7 @@ public class Farmer extends HttpServlet {
    * Implements pagination
    * 
    * */
-  public void get_pager(Integer page,HttpServletResponse response){
+  public void get_pager(Integer page,HttpServletRequest request ,HttpServletResponse response){
     try{
       if(request.getParameter("pagedown") != null)
         page--;
