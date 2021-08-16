@@ -84,14 +84,14 @@ public class Farmer extends HttpServlet {
    * */
   public void get_pager(Integer page,HttpServletRequest request ,HttpServletResponse response){
     try{
-      if(request.getParameter("pagedown") != null && page>0)
-        page--;
-      else if(request.getParameter("pageup") != null )
-        page++;
+
+      if(page <= 0)
+        response.getWriter().append("<button type=\"submit\"name=\"page\" value=0 size=\"90\" ><</button>");
+      else
+        response.getWriter().append("<button type=\"submit\"name=\"page\"  value="+(page-1)+" size=\"90\" ><</button>");
       response.getWriter().append(
-        "<button type=\"submit\"name=\"pagedown\" size=\"90\" ><</button>"+
         "<input name=\"page\" type=\"number\" size=\"90\" value="+page+">"+
-        "<button type=\"submit\" name=\"pageup\" size=\"90\" >></button>"
+        "<button type=\"submit\" name=\"pageup\"  value="+(page+1)+" size=\"90\" >></button>"
         );
     }
     catch(Exception e){
