@@ -66,13 +66,16 @@ public class Farmer extends HttpServlet {
         title_name+
         "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
         "Enter city<input name=\"city\" type=\"text\" size=\"60\" value=\""+city+"\">" +
-        "<input type=\"submit\" value=\"Find\"></form>" );
+        "<input type=\"submit\" value=\"Find\">"+
+        "<button type=\"submit\"name=\"pageup\"><</button>"+
+        "<button type=\"submit\" name=\"pagedown\">></button>"
+        +"</form>" );
 
     if(state.length()==0 && city.length()==0)
       System.out.print("First enter");
     else
       get_from_sql(state, city, response);
-    get_pager(page, request,response);
+    // get_pager(page, request,response);
     //END
     response.getWriter().append("</body></html>");
   }
