@@ -87,7 +87,7 @@ public class Farmer extends HttpServlet {
       else if(request.getParameter("pageup") != null)
         page++;
       response.getWriter().append("<button type=”submit” name=”pagedown”>View</button>"+
-            "<p>"+ page+"</p>"
+            "<p>"+ page+"</p>"+
                                 "<button type=”submit” name=”pageup”>Add</button>");
     }
     catch(Exception e){
