@@ -137,7 +137,7 @@ public class Farmer extends HttpServlet {
                 append("</td><td>").append(rs.getString("state")).
                 append("</td><td>").append(rs.getString("reviewscore")+"/5 ("+rs.getString("reviewcount")+")").
                 append("</td><td>").append(rs.getString("website")).
-                append("</td><td>").append(rs.getString("<a href=\""+current_url+"farmer/farmerdetail?id="+id+"\" >detail</a>")).
+                append("</td><td>").append("<a href=\""+current_url+"farmer/farmerdetail?id="+rs.getString("id")+"\" >detail</a>").
                 append("</td></tr>");
             }
           }
