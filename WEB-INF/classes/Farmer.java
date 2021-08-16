@@ -61,7 +61,7 @@ public class Farmer extends HttpServlet {
         page = Integer.parseInt(parameterMap.get("page"));
       }
     }
-    response.getWriter().append("<%@ page import=\"java.io.*\"%>"+
+    response.getWriter().append(
       "<html><title>Farmer search</title><body>" +
         title_name+
         "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
