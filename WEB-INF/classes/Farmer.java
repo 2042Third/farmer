@@ -65,7 +65,10 @@ public class Farmer extends HttpServlet {
         "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
         "Enter city<input name=\"city\" type=\"text\" size=\"60\" value=\""+city+"\">" +
         "<br/><input type=\"submit\" value=\"Find\"></form>" );
-    get_from_sql(state, city, response);
+    if(state.length()==0 && city.length()==0)
+      System.out.print("First enter");
+    else
+      get_from_sql(state, city, response);
 
     //END
     response.getWriter().append("</body></html>");
