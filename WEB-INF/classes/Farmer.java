@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Farmer extends HttpServlet {
   private static final long serialVersionUID = 1L;
   public HelloUserGet a;
-  public String title_name = "<h1>Farmer Search</h1></br><h2>New search</h2>";
+  public String title_name = "<h1>Farmer Search</h1><p>New search</p>";
   public StringBuffer resultTable = new StringBuffer(
         );
   public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
@@ -47,7 +47,7 @@ public class Farmer extends HttpServlet {
     // TODO Auto-generated method stub
     
     String state = "", city = "";
-    
+    Integer page=0;
     String parameters = request.getQueryString();
     if (parameters != null && !parameters.isEmpty()) {
       Map<String,String> parameterMap = splitQuery(parameters);
@@ -57,25 +57,37 @@ public class Farmer extends HttpServlet {
       if (parameterMap.containsKey("city")) {
         city = parameterMap.get("city");
       }
+      if(parameterMap.containsKey("page")) {
+        page = Integer.parseInt(parameterMap.get("page"));
+      }
     }
     response.getWriter().append("<html><title>Farmer search</title><body>" +
         title_name+
         "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
         "Enter city<input name=\"city\" type=\"text\" size=\"60\" value=\""+city+"\">" +
-        "<br/><input type=\"submit\" value=\"Find\"></form>" );
+        "<input type=\"submit\" value=\"Find\"></form>" );
 
     if(state.length()==0 && city.length()==0)
       System.out.print("First enter");
     else
       get_from_sql(state, city, response);
-
+    get_pager(response);
     //END
     response.getWriter().append("</body></html>");
   }
+  /**
+   * Implements pagination
+   * 
+   * */
+  public get_pager(HttpServletResponse response){
+    response.getWriter().append("<%out.println(\"at least try to page\")%>");
+  }
 
   /**
+   * note: this code looks disgusting, modified from one the lecture examples.
    * Connects to the data base and search for the input,
-   * return the result to ResultSet
+   * return the result to ResultSet.
+   * 
    * @param state state
    * @param city city
    * @param response the response
@@ -161,113 +173,5 @@ public class Farmer extends HttpServlet {
   
 
 
-  // /**
-  //  * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-  //  */
-  // protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-  //   // TODO Auto-generated method stub
-  //   //doGet(request, response);
-  //       Scanner s = null;
-  //       ServletInputStream inputStream = null;
-  //       String data = "";
-  //       try {
-  //         inputStream = request.getInputStream();
-  //           s = new Scanner(inputStream, "UTF-8");
-  //           s.useDelimiter("\\A");
-  //           data = s.hasNext() ? s.next() : "";
-  //       } catch (IOException e) {
-  //           e.printStackTrace();
-  //       }
-  //       finally {
-  //         if (s != null) {
-  //           s.close();
-  //         }
-  //       }
-  //       String state = "", city = "";
-  //       if (!data.isEmpty()) {
-  //     Map<String,String> parameterMap = splitQuery(data);
-  //     System.out.println(data);
-  //     if (parameterMap.containsKey("state")) {
-  //       state = parameterMap.get("state");
-  //     }
-  //     if (parameterMap.containsKey("city")) {
-  //       city = parameterMap.get("city");
-  //     }
-  //   }
-
-  //   Preferences root  = Preferences.userRoot();
-  //   Preferences node = Preferences.userNodeForPackage(this.getClass());
-  //   String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
-
-
-  //   Connection con = null;
-    
-  //   try
-  //   {
-  //     con = DriverManager.getConnection(url, "admin", "f3ck");
-  //     String query = "SELECT name, website,city, county, state " + 
-  //             "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ?";
-  //     try (PreparedStatement stat = con.prepareStatement(query)) {
-  //       stat.setString(1, state+"%");
-  //       stat.setString(2, city+"%");
-  //       try (ResultSet rs = stat.executeQuery()) {
-  //         System.out.println("Executed the following SQL statement:");
-  //         System.out.println(query);
-  //         while (rs.next()) {
-  //           resultTable.append("<tr><td>").append(rs.getString(1)).
-  //             append("</td><td>").append(rs.getString("city")+", "+rs.getString("county")).
-  //             append("</td><td>").append(rs.getString("state")).
-  //             append("</td><td>").append("5/5").
-  //             append("</td><td>").append(rs.getString("website")).
-  //             append("</td></tr>");
-  //         }
-  //       }
-  //       resultTable.append("</table>");
-  //     }
-  //   }
-  //   catch (SQLException ex) {
-  //     for (Throwable t : ex)
-  //       System.out.println(t.getMessage());
-  //     System.out.println("Opening connection unsuccessful!");
-  //   }
-  //   finally {
-  //     node.put("MySQLConnection", url);
-  //     if (con != null) {
-  //       try {
-  //         con.close();
-  //       }
-  //       catch (SQLException ex) {
-  //         for (Throwable t : ex)
-  //           System.out.println(t.getMessage());
-  //         System.out.println("Closing connection unsuccessful!");
-  //       }
-  //     }
-  //   }
-  //       System.out.println("State is: " + state);
-  //   response.getWriter().append("<html><title>Airport Search Web App</title>" +
-  //       "<head><style>\r\n" + 
-  //       "table {\r\n" + 
-  //       "  font-family: arial, sans-serif;\r\n" + 
-  //       "  border-collapse: collapse;\r\n" + 
-  //       "  width: 100%;\r\n" + 
-  //       "}\r\n" + 
-  //       "\r\n" + 
-  //       "td, th {\r\n" + 
-  //       "  border: 1px solid #dddddd;\r\n" + 
-  //       "  text-align: left;\r\n" + 
-  //       "  padding: 8px;\r\n" + 
-  //       "}\r\n" + 
-  //       "\r\n" + 
-  //       "tr:nth-child(even) {\r\n" + 
-  //       "  background-color: #dddddd;\r\n" + 
-  //       "}\r\n" + 
-  //       "</style></head>" +
-  //       "<body>" +
-  //       "<H1>Search results for state: " + state +
-  //       " and city: " + city +
-  //       "</H1>" +
-  //       "" + resultTable.toString() + 
-  //       "</body></html>");
-  // }
 
 }
