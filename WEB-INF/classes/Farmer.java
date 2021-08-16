@@ -153,7 +153,7 @@ public class Farmer extends HttpServlet {
             "" + resultTable.toString() );
       }
       catch(Exception e){
-        Systemout.println("get writer fucked");
+        System.out.println("get writer fucked");
       }
     }
   
