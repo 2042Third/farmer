@@ -128,7 +128,7 @@ public class Farmer extends HttpServlet {
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setString(1, state+"%");
           stat.setString(2, city+"%");
-          stat.setInt(3, page);
+          stat.setInt(3, page*20);
           try (ResultSet rs = stat.executeQuery()) {
             System.out.println("Executed the following SQL statement:");
             System.out.println(query);
