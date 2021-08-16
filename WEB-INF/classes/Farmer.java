@@ -122,7 +122,7 @@ public class Farmer extends HttpServlet {
         con = DriverManager.getConnection(url, "admin", "f3ck");
         String query = "SELECT name, website,city, county, state " + 
                 "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ? "+
-                "LIMIT 20 OFFSET ?";
+                "LIMIT 20 OFFSET ?;";
         resultTable = new StringBuffer("<table>"+
         "<tr><th>Name</th><th>City/County</th><th>State</th>" +
         "<th>Reviews</th><th>website</th></tr>");
