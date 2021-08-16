@@ -78,11 +78,11 @@ LOAD DATA LOCAL INFILE '/home/laptopadmin/Downloads/Export.csv' INTO TABLE farme
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"'
 LINES TERMINATED BY '\n' (id, name,
   website,facebook,twitter,youtube,othermedia,street,city,county,state,zip,season1date,season1time,season2date,season2time,season3date,season3time,season4date,season4time,x,y,location,credit,wic,wiccash,sfmnp,snap
-, @var1, @var2, @var3, @var4, @var5, @var6, @var7, @var8, @var9, @var10, @var11, @var12, @var13, @var14, @var15, @var16, @var17, @var18, @var19, @var20, @var21, @var22, @var23, @var24, @var25, @var26, @var27, @var28, @var29, @var30
+, @var31, @var32, @var33, @var4, @var5, @var6, @var7, @var8, @var9, @var10, @var11, @var12, @var13, @var14, @var15, @var16, @var17, @var18, @var19, @var20, @var21, @var22, @var23, @var24, @var25, @var26, @var27, @var28, @var29, @var30
 ,updatetime)
-SET organic = (@var1 = 'Y')
-AND bakedgoods = (@var2 = 'Y')
-AND cheese = (@var3 = 'Y')
+SET organic = STRCMP(@var31, 'Y')
+AND bakedgoods = (@var32 = 'Y')
+AND cheese = (@var33 = 'Y')
 AND crafts = (@var4 = 'Y')
 AND flowers = (@var5 = 'Y')
 AND eggs = (@var6 = 'Y')
