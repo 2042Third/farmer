@@ -20,8 +20,8 @@ public class Farmer extends HttpServlet {
   public HelloUserGet a;
   public String title_name = "<h2>Farmer Search</h2><p>New search</p>";
   public String formtail = "</form>";
-  public StringBuffer resultTable = new StringBuffer(
-        );
+  public StringBuffer resultTable = new StringBuffer();
+  public String current_url = "192.168.1.28:8080/";
   public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
       Map<String, String> query_pairs = new LinkedHashMap<String, String>();
       String[] pairs = query.split("&");
@@ -119,11 +119,11 @@ public class Farmer extends HttpServlet {
       try
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
-        String query = "SELECT name, website,city, county, state, reviewcount, reviewscore " + 
+        String query = "SELECT id, name, website,city, county, state, reviewcount, reviewscore " + 
                 "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ? LIMIT 20 OFFSET ? ;";
         resultTable = new StringBuffer("<table>"+
         "<tr><th>Name</th><th>City/County</th><th>State</th>" +
-        "<th>Reviews</th><th>website</th></tr>");
+        "<th>Reviews</th><th>website</th><th>Detail</th></tr>");
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setString(1, state+"%");
           stat.setString(2, city+"%");
@@ -137,6 +137,7 @@ public class Farmer extends HttpServlet {
                 append("</td><td>").append(rs.getString("state")).
                 append("</td><td>").append(rs.getString("reviewscore")+"/5 ("+rs.getString("reviewcount")+")").
                 append("</td><td>").append(rs.getString("website")).
+                append("</td><td>").append(rs.getString("<a href=\""+current_url+"farmer/farmerdetail?id="+id+"\" >detail</a>")).
                 append("</td></tr>");
             }
           }
