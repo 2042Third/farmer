@@ -151,116 +151,116 @@ public class Farmer extends HttpServlet {
           "</H1>" +
           "" + resultTable.toString() );
     }
-  }
+  
 
 
-  /**
-   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-   */
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    //doGet(request, response);
-        Scanner s = null;
-        ServletInputStream inputStream = null;
-        String data = "";
-        try {
-          inputStream = request.getInputStream();
-            s = new Scanner(inputStream, "UTF-8");
-            s.useDelimiter("\\A");
-            data = s.hasNext() ? s.next() : "";
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-          if (s != null) {
-            s.close();
-          }
-        }
-        String state = "", city = "";
-        if (!data.isEmpty()) {
-      Map<String,String> parameterMap = splitQuery(data);
-      System.out.println(data);
-      if (parameterMap.containsKey("state")) {
-        state = parameterMap.get("state");
-      }
-      if (parameterMap.containsKey("city")) {
-        city = parameterMap.get("city");
-      }
-    }
+  // /**
+  //  * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+  //  */
+  // protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  //   // TODO Auto-generated method stub
+  //   //doGet(request, response);
+  //       Scanner s = null;
+  //       ServletInputStream inputStream = null;
+  //       String data = "";
+  //       try {
+  //         inputStream = request.getInputStream();
+  //           s = new Scanner(inputStream, "UTF-8");
+  //           s.useDelimiter("\\A");
+  //           data = s.hasNext() ? s.next() : "";
+  //       } catch (IOException e) {
+  //           e.printStackTrace();
+  //       }
+  //       finally {
+  //         if (s != null) {
+  //           s.close();
+  //         }
+  //       }
+  //       String state = "", city = "";
+  //       if (!data.isEmpty()) {
+  //     Map<String,String> parameterMap = splitQuery(data);
+  //     System.out.println(data);
+  //     if (parameterMap.containsKey("state")) {
+  //       state = parameterMap.get("state");
+  //     }
+  //     if (parameterMap.containsKey("city")) {
+  //       city = parameterMap.get("city");
+  //     }
+  //   }
 
-    Preferences root  = Preferences.userRoot();
-    Preferences node = Preferences.userNodeForPackage(this.getClass());
-    String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
+  //   Preferences root  = Preferences.userRoot();
+  //   Preferences node = Preferences.userNodeForPackage(this.getClass());
+  //   String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
 
 
-    Connection con = null;
+  //   Connection con = null;
     
-    try
-    {
-      con = DriverManager.getConnection(url, "admin", "f3ck");
-      String query = "SELECT name, website,city, county, state " + 
-              "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ?";
-      try (PreparedStatement stat = con.prepareStatement(query)) {
-        stat.setString(1, state+"%");
-        stat.setString(2, city+"%");
-        try (ResultSet rs = stat.executeQuery()) {
-          System.out.println("Executed the following SQL statement:");
-          System.out.println(query);
-          while (rs.next()) {
-            resultTable.append("<tr><td>").append(rs.getString(1)).
-              append("</td><td>").append(rs.getString("city")+", "+rs.getString("county")).
-              append("</td><td>").append(rs.getString("state")).
-              append("</td><td>").append("5/5").
-              append("</td><td>").append(rs.getString("website")).
-              append("</td></tr>");
-          }
-        }
-        resultTable.append("</table>");
-      }
-    }
-    catch (SQLException ex) {
-      for (Throwable t : ex)
-        System.out.println(t.getMessage());
-      System.out.println("Opening connection unsuccessful!");
-    }
-    finally {
-      node.put("MySQLConnection", url);
-      if (con != null) {
-        try {
-          con.close();
-        }
-        catch (SQLException ex) {
-          for (Throwable t : ex)
-            System.out.println(t.getMessage());
-          System.out.println("Closing connection unsuccessful!");
-        }
-      }
-    }
-        System.out.println("State is: " + state);
-    response.getWriter().append("<html><title>Airport Search Web App</title>" +
-        "<head><style>\r\n" + 
-        "table {\r\n" + 
-        "  font-family: arial, sans-serif;\r\n" + 
-        "  border-collapse: collapse;\r\n" + 
-        "  width: 100%;\r\n" + 
-        "}\r\n" + 
-        "\r\n" + 
-        "td, th {\r\n" + 
-        "  border: 1px solid #dddddd;\r\n" + 
-        "  text-align: left;\r\n" + 
-        "  padding: 8px;\r\n" + 
-        "}\r\n" + 
-        "\r\n" + 
-        "tr:nth-child(even) {\r\n" + 
-        "  background-color: #dddddd;\r\n" + 
-        "}\r\n" + 
-        "</style></head>" +
-        "<body>" +
-        "<H1>Search results for state: " + state +
-        " and city: " + city +
-        "</H1>" +
-        "" + resultTable.toString() + 
-        "</body></html>");
-  }
+  //   try
+  //   {
+  //     con = DriverManager.getConnection(url, "admin", "f3ck");
+  //     String query = "SELECT name, website,city, county, state " + 
+  //             "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ?";
+  //     try (PreparedStatement stat = con.prepareStatement(query)) {
+  //       stat.setString(1, state+"%");
+  //       stat.setString(2, city+"%");
+  //       try (ResultSet rs = stat.executeQuery()) {
+  //         System.out.println("Executed the following SQL statement:");
+  //         System.out.println(query);
+  //         while (rs.next()) {
+  //           resultTable.append("<tr><td>").append(rs.getString(1)).
+  //             append("</td><td>").append(rs.getString("city")+", "+rs.getString("county")).
+  //             append("</td><td>").append(rs.getString("state")).
+  //             append("</td><td>").append("5/5").
+  //             append("</td><td>").append(rs.getString("website")).
+  //             append("</td></tr>");
+  //         }
+  //       }
+  //       resultTable.append("</table>");
+  //     }
+  //   }
+  //   catch (SQLException ex) {
+  //     for (Throwable t : ex)
+  //       System.out.println(t.getMessage());
+  //     System.out.println("Opening connection unsuccessful!");
+  //   }
+  //   finally {
+  //     node.put("MySQLConnection", url);
+  //     if (con != null) {
+  //       try {
+  //         con.close();
+  //       }
+  //       catch (SQLException ex) {
+  //         for (Throwable t : ex)
+  //           System.out.println(t.getMessage());
+  //         System.out.println("Closing connection unsuccessful!");
+  //       }
+  //     }
+  //   }
+  //       System.out.println("State is: " + state);
+  //   response.getWriter().append("<html><title>Airport Search Web App</title>" +
+  //       "<head><style>\r\n" + 
+  //       "table {\r\n" + 
+  //       "  font-family: arial, sans-serif;\r\n" + 
+  //       "  border-collapse: collapse;\r\n" + 
+  //       "  width: 100%;\r\n" + 
+  //       "}\r\n" + 
+  //       "\r\n" + 
+  //       "td, th {\r\n" + 
+  //       "  border: 1px solid #dddddd;\r\n" + 
+  //       "  text-align: left;\r\n" + 
+  //       "  padding: 8px;\r\n" + 
+  //       "}\r\n" + 
+  //       "\r\n" + 
+  //       "tr:nth-child(even) {\r\n" + 
+  //       "  background-color: #dddddd;\r\n" + 
+  //       "}\r\n" + 
+  //       "</style></head>" +
+  //       "<body>" +
+  //       "<H1>Search results for state: " + state +
+  //       " and city: " + city +
+  //       "</H1>" +
+  //       "" + resultTable.toString() + 
+  //       "</body></html>");
+  // }
 
 }
