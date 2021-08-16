@@ -89,9 +89,8 @@ public class Farmer extends HttpServlet {
         response.getWriter().append("<button type=\"submit\"name=\"page\" value=0 size=\"90\" ><</button>");
       else
         response.getWriter().append("<button type=\"submit\"name=\"page\"  value="+(page-1)+" size=\"90\" ><</button>");
-      response.getWriter().append(
-        "<input name=\"page\" type=\"number\" size=\"90\" value="+page+">"+
-        "<button type=\"submit\" name=\"pageup\"  value="+(page+1)+" size=\"90\" >></button>"
+      response.getWriter().append(page+
+        "<button type=\"submit\" name=\"page\"  value="+(page+1)+" size=\"90\" >></button>"
         );
     }
     catch(Exception e){
