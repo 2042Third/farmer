@@ -79,7 +79,7 @@ FIELDS TERMINATED BY ',' ENCLOSED BY '\"'
 LINES TERMINATED BY '\n' (id, name,
   website,facebook,twitter,youtube,othermedia,street,city,county,state,zip,season1date,season1time,season2date,season2time,season3date,season3time,season4date,season4time,x,y,location,credit,wic,wiccash,sfmnp,snap
 ,organic,bakedgoods,cheese,crafts,flowers,eggs,seafood,herbs,vegetables,honey,jams,maple,meat,nursery,nuts,plants,poultry,prepared,soap,trees,wine,coffee,beans,fruits,grains,juices,mushrooms,petfood,tofu,wildharvested
-,updatetime)
+,updatetime);
 -- SET organic = (@var1 = 'Y')
 -- AND bakedgoods = (@var2 = 'Y')
 -- AND cheese = (@var3 = 'Y')
