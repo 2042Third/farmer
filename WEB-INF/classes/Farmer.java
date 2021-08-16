@@ -19,10 +19,7 @@ public class Farmer extends HttpServlet {
   private static final long serialVersionUID = 1L;
   public HelloUserGet a;
   public String title_name = "<h2>Farmer Search</h2><p>New search</p>";
-  public String formtail = 
-        "<button type=\"submit\"name=\"pageup\"><</button>"+
-        "<button type=\"submit\" name=\"pagedown\">></button>"
-        +"</form>";
+  public String formtail = "</form>";
   public StringBuffer resultTable = new StringBuffer(
         );
   public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
@@ -76,8 +73,8 @@ public class Farmer extends HttpServlet {
       System.out.print("First enter");
     else
       get_from_sql(state, city, response);
+    get_pager(page, request,response);
     response.getWriter().append(formtail);
-    // get_pager(page, request,response);
     //END
     response.getWriter().append("</body></html>");
   }
@@ -91,9 +88,11 @@ public class Farmer extends HttpServlet {
         page--;
       else if(request.getParameter("pageup") != null)
         page++;
-      response.getWriter().append("<button type=”submit” name=”pagedown”>View</button>"+
-            "<p>"+ page+"</p>"+
-                                "<button type=”submit” name=”pageup”>Add</button>");
+      response.getWriter().append(
+        "<button type=\"submit\"name=\"pageup\"><</button>"+
+        page+
+        "<button type=\"submit\" name=\"pagedown\">></button>"
+        );
     }
     catch(Exception e){
       System.out.println("ok, bad getwriter");
