@@ -57,7 +57,7 @@ public class Farmer extends HttpServlet {
         state = parameterMap.get("state");
       }
       if (parameterMap.containsKey("city")) {
-        state = parameterMap.get("city");
+        city = parameterMap.get("city");
       }
     }
     response.getWriter().append("<html><title>Farmer search</title><body>" +
