@@ -81,7 +81,7 @@ public class Farmer extends HttpServlet {
    * */
   public void get_pager(HttpServletResponse response){
     try{
-      response.getWriter().append("<%= out.println(\"at least try to page\")%>");
+      response.getWriter().append("<%\n out.println(\"at least try to page\");\n%>");
     }
     catch(Exception e){
       System.out.println("ok, bad getwriter");
