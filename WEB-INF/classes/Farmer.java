@@ -20,8 +20,6 @@ public class Farmer extends HttpServlet {
   public HelloUserGet a;
   public String title_name = "<h1>Farmer Search</h1></br><h2>New search</h2>";
   public StringBuffer resultTable = new StringBuffer(
-        "<table><tr><th>Name</th><th>City/County</th><th>State</th>" +
-        "<th>Reviews</th><th>website</th></tr>"
         );
   public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
       Map<String, String> query_pairs = new LinkedHashMap<String, String>();
@@ -65,6 +63,7 @@ public class Farmer extends HttpServlet {
         "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
         "Enter city<input name=\"city\" type=\"text\" size=\"60\" value=\""+city+"\">" +
         "<br/><input type=\"submit\" value=\"Find\"></form>" );
+
     if(state.length()==0 && city.length()==0)
       System.out.print("First enter");
     else
@@ -94,7 +93,9 @@ public class Farmer extends HttpServlet {
         con = DriverManager.getConnection(url, "admin", "f3ck");
         String query = "SELECT name, website,city, county, state " + 
                 "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ?";
-        resultTable = new StringBuffer("");
+        resultTable = new StringBuffer("<table>"+
+        "<tr><th>Name</th><th>City/County</th><th>State</th>" +
+        "<th>Reviews</th><th>website</th></tr>");
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setString(1, state+"%");
           stat.setString(2, city+"%");
@@ -133,25 +134,7 @@ public class Farmer extends HttpServlet {
       }
           System.out.println("State is: " + state);
         try{
-        response.getWriter().append( 
-            "<head><style>\r\n" + 
-            "table {\r\n" + 
-            "  font-family: arial, sans-serif;\r\n" + 
-            "  border-collapse: collapse;\r\n" + 
-            "  width: 100%;\r\n" + 
-            "}\r\n" + 
-            "\r\n" + 
-            "td, th {\r\n" + 
-            "  border: 1px solid #dddddd;\r\n" + 
-            "  text-align: left;\r\n" + 
-            "  padding: 8px;\r\n" + 
-            "}\r\n" + 
-            "\r\n" + 
-            "tr:nth-child(even) {\r\n" + 
-            "  background-color: #dddddd;\r\n" + 
-            "}\r\n" + 
-            "</style></head>" +
-            "" + resultTable.toString() );
+        response.getWriter().append( resultTable.toString() );
       }
       catch(Exception e){
         System.out.println("get writer fucked");
