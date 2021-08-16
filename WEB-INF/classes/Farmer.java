@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Farmer extends HttpServlet {
   private static final long serialVersionUID = 1L;
   public HelloUserGet a;
-  public String title_name = "<h1>Farmer Search</h1><p>New search</p>";
+  public String title_name = "<h2>Farmer Search</h2><p>New search</p>";
   public StringBuffer resultTable = new StringBuffer(
         );
   public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
@@ -61,7 +61,7 @@ public class Farmer extends HttpServlet {
         page = Integer.parseInt(parameterMap.get("page"));
       }
     }
-    response.getWriter().append("<html><title>Farmer search</title><body>" +
+    response.getWriter().append("<%@ page import="java.io.*"%><html><title>Farmer search</title><body>" +
         title_name+
         "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
         "Enter city<input name=\"city\" type=\"text\" size=\"60\" value=\""+city+"\">" +
