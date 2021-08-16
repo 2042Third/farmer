@@ -19,6 +19,10 @@ public class Farmer extends HttpServlet {
   private static final long serialVersionUID = 1L;
   public HelloUserGet a;
   public String title_name = "<h2>Farmer Search</h2><p>New search</p>";
+  public String formtail = 
+        "<button type=\"submit\"name=\"pageup\"><</button>"+
+        "<button type=\"submit\" name=\"pagedown\">></button>"
+        +"</form>";
   public StringBuffer resultTable = new StringBuffer(
         );
   public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
@@ -66,15 +70,13 @@ public class Farmer extends HttpServlet {
         title_name+
         "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
         "Enter city<input name=\"city\" type=\"text\" size=\"60\" value=\""+city+"\">" +
-        "<input type=\"submit\" value=\"Find\">"+
-        "<button type=\"submit\"name=\"pageup\"><</button>"+
-        "<button type=\"submit\" name=\"pagedown\">></button>"
-        +"</form>" );
+        "<input type=\"submit\" value=\"Find\">" );
 
     if(state.length()==0 && city.length()==0)
       System.out.print("First enter");
     else
       get_from_sql(state, city, response);
+    response.getWriter().append(formtail);
     // get_pager(page, request,response);
     //END
     response.getWriter().append("</body></html>");
