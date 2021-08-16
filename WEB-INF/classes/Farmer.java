@@ -80,9 +80,15 @@ public class Farmer extends HttpServlet {
    * Implements pagination
    * 
    * */
-  public void get_pager(HttpServletResponse response){
+  public void get_pager(Integer page,HttpServletResponse response){
     try{
-      response.getWriter().append("<b>${param.page}</b>");
+      if(request.getParameter("pagedown") != null)
+        page--;
+      else if(request.getParameter("pageup") != null)
+        page++;
+      response.getWriter().append("<button type=”submit” name=”pagedown”>View</button>"+
+            "<p>"+ page+"</p>"
+                                "<button type=”submit” name=”pageup”>Add</button>");
     }
     catch(Exception e){
       System.out.println("ok, bad getwriter");
