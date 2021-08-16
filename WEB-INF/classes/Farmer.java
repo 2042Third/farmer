@@ -94,6 +94,7 @@ public class Farmer extends HttpServlet {
         con = DriverManager.getConnection(url, "admin", "f3ck");
         String query = "SELECT name, website,city, county, state " + 
                 "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ?";
+        resultTable = new StringBuffer("");
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setString(1, state+"%");
           stat.setString(2, city+"%");
