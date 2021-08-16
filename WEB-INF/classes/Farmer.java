@@ -84,9 +84,9 @@ public class Farmer extends HttpServlet {
    * */
   public void get_pager(Integer page,HttpServletRequest request ,HttpServletResponse response){
     try{
-      if(request.getParameter("pagedown") != null)
+      if(request.getParameter("pagedown") != null && page>=0)
         page--;
-      else if(request.getParameter("pageup") != null)
+      else if(request.getParameter("pageup") != null )
         page++;
       response.getWriter().append(
         "<button type=\"submit\"name=\"pagedown\" size=\"90\" ><</button>"+
@@ -120,13 +120,15 @@ public class Farmer extends HttpServlet {
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
         String query = "SELECT name, website,city, county, state " + 
-                "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ?";
+                "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ? "+
+                "LIMIT 20, OFFSET ?";
         resultTable = new StringBuffer("<table>"+
         "<tr><th>Name</th><th>City/County</th><th>State</th>" +
         "<th>Reviews</th><th>website</th></tr>");
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setString(1, state+"%");
           stat.setString(2, city+"%");
+          stat.setString(3, page*20+"");
           try (ResultSet rs = stat.executeQuery()) {
             System.out.println("Executed the following SQL statement:");
             System.out.println(query);
