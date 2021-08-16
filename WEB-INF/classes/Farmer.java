@@ -84,7 +84,7 @@ public class Farmer extends HttpServlet {
    * */
   public void get_pager(Integer page,HttpServletRequest request ,HttpServletResponse response){
     try{
-      if(request.getParameter("pagedown") != null && page>=0)
+      if(request.getParameter("pagedown") != null && page>0)
         page--;
       else if(request.getParameter("pageup") != null )
         page++;
