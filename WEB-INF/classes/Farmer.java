@@ -79,7 +79,7 @@ public class Farmer extends HttpServlet {
    * Implements pagination
    * 
    * */
-  public get_pager(HttpServletResponse response){
+  public void get_pager(HttpServletResponse response){
     response.getWriter().append("<%out.println(\"at least try to page\")%>");
   }
 
