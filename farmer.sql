@@ -69,7 +69,9 @@ CREATE TABLE `farmers` (
   `petfood` VARCHAR(3) DEFAULT 'N',
   `tofu` VARCHAR(3) DEFAULT 'N',
   `wildharvested` VARCHAR(3) DEFAULT 'N',
-  `updatetime` VARCHAR(255) DEFAULT NULL
+  `updatetime` VARCHAR(255) DEFAULT NULL,
+  `reviewcount` INT DEFAULT 0,
+  `reviewscore` INT DEFAULT 0
 );
 -- ["SET "+part1[i]+" = (@var"+str(i+1)+" = \'Y\');\n" for i in range(len(part1))]
 SET GLOBAL local_infile = 'ON';
