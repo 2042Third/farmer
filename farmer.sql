@@ -39,36 +39,36 @@ CREATE TABLE `farmers` (
   `wiccash` VARCHAR(255) DEFAULT NULL,
   `sfmnp` VARCHAR(255) DEFAULT NULL,
   `snap`VARCHAR(255) DEFAULT NULL,
-  `organic` BOOLEAN DEFAULT NULL,
-  `bakedgoods` BOOLEAN DEFAULT NULL,
-  `cheese` BOOLEAN DEFAULT NULL,
-  `crafts` BOOLEAN DEFAULT NULL,
-  `flowers` BOOLEAN DEFAULT NULL,
-  `eggs` BOOLEAN DEFAULT NULL,
-  `seafood` BOOLEAN DEFAULT NULL,
-  `herbs` BOOLEAN DEFAULT NULL,
-  `vegetables` BOOLEAN DEFAULT NULL,
-  `honey` BOOLEAN DEFAULT NULL,
-  `jams` BOOLEAN DEFAULT NULL,
-  `maple` BOOLEAN DEFAULT NULL,
-  `meat` BOOLEAN DEFAULT NULL,
-  `nursery` BOOLEAN DEFAULT NULL,
-  `nuts` BOOLEAN DEFAULT NULL,
-  `plants` BOOLEAN DEFAULT NULL,
-  `poultry` BOOLEAN DEFAULT NULL,
-  `prepared` BOOLEAN DEFAULT NULL,
-  `soap` BOOLEAN DEFAULT NULL,
-  `trees` BOOLEAN DEFAULT NULL,
-  `wine` BOOLEAN DEFAULT NULL,
-  `coffee` BOOLEAN DEFAULT NULL,
-  `beans` BOOLEAN DEFAULT NULL,
-  `fruits` BOOLEAN DEFAULT NULL,
-  `grains` BOOLEAN DEFAULT NULL,
-  `juices` BOOLEAN DEFAULT NULL,
-  `mushrooms` BOOLEAN DEFAULT NULL,
-  `petfood` BOOLEAN DEFAULT NULL,
-  `tofu` BOOLEAN DEFAULT NULL,
-  `wildharvested` BOOLEAN DEFAULT NULL,
+  `organic` VARCHAR(3) DEFAULT 'N',
+  `bakedgoods` VARCHAR(3) DEFAULT 'N',
+  `cheese` VARCHAR(3) DEFAULT 'N',
+  `crafts` VARCHAR(3) DEFAULT 'N',
+  `flowers` VARCHAR(3) DEFAULT 'N',
+  `eggs` VARCHAR(3) DEFAULT 'N',
+  `seafood` VARCHAR(3) DEFAULT 'N',
+  `herbs` VARCHAR(3) DEFAULT 'N',
+  `vegetables` VARCHAR(3) DEFAULT 'N',
+  `honey` VARCHAR(3) DEFAULT 'N',
+  `jams` VARCHAR(3) DEFAULT 'N',
+  `maple` VARCHAR(3) DEFAULT 'N',
+  `meat` VARCHAR(3) DEFAULT 'N',
+  `nursery` VARCHAR(3) DEFAULT 'N',
+  `nuts` VARCHAR(3) DEFAULT 'N',
+  `plants` VARCHAR(3) DEFAULT 'N',
+  `poultry` VARCHAR(3) DEFAULT 'N',
+  `prepared` VARCHAR(3) DEFAULT 'N',
+  `soap` VARCHAR(3) DEFAULT 'N',
+  `trees` VARCHAR(3) DEFAULT 'N',
+  `wine` VARCHAR(3) DEFAULT 'N',
+  `coffee` VARCHAR(3) DEFAULT 'N',
+  `beans` VARCHAR(3) DEFAULT 'N',
+  `fruits` VARCHAR(3) DEFAULT 'N',
+  `grains` VARCHAR(3) DEFAULT 'N',
+  `juices` VARCHAR(3) DEFAULT 'N',
+  `mushrooms` VARCHAR(3) DEFAULT 'N',
+  `petfood` VARCHAR(3) DEFAULT 'N',
+  `tofu` VARCHAR(3) DEFAULT 'N',
+  `wildharvested` VARCHAR(3) DEFAULT 'N',
   `updatetime` VARCHAR(255) DEFAULT NULL
 );
 -- ["SET "+part1[i]+" = (@var"+str(i+1)+" = \'Y\');\n" for i in range(len(part1))]
@@ -78,37 +78,37 @@ LOAD DATA LOCAL INFILE '/home/laptopadmin/Downloads/Export.csv' INTO TABLE farme
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"'
 LINES TERMINATED BY '\n' (id, name,
   website,facebook,twitter,youtube,othermedia,street,city,county,state,zip,season1date,season1time,season2date,season2time,season3date,season3time,season4date,season4time,x,y,location,credit,wic,wiccash,sfmnp,snap
-, @var1, @var2, @var3, @var4, @var5, @var6, @var7, @var8, @var9, @var10, @var11, @var12, @var13, @var14, @var15, @var16, @var17, @var18, @var19, @var20, @var21, @var22, @var23, @var24, @var25, @var26, @var27, @var28, @var29, @var30
+,organic,bakedgoods,cheese,crafts,flowers,eggs,seafood,herbs,vegetables,honey,jams,maple,meat,nursery,nuts,plants,poultry,prepared,soap,trees,wine,coffee,beans,fruits,grains,juices,mushrooms,petfood,tofu,wildharvested
 ,updatetime)
-SET organic = (@var1 = 'Y')
-AND bakedgoods = (@var2 = 'Y')
-AND cheese = (@var3 = 'Y')
-AND crafts = (@var4 = 'Y')
-AND flowers = (@var5 = 'Y')
-AND eggs = (@var6 = 'Y')
-AND seafood = (@var7 = 'Y')
-AND herbs = (@var8 = 'Y')
-AND vegetables = (@var9 = 'Y')
-AND honey = (@var10 = 'Y')
-AND jams = (@var11 = 'Y')
-AND maple = (@var12 = 'Y')
-AND meat = (@var13 = 'Y')
-AND nursery = (@var14 = 'Y')
-AND nuts = (@var15 = 'Y')
-AND plants = (@var16 = 'Y')
-AND poultry = (@var17 = 'Y')
-AND prepared = (@var18 = 'Y')
-AND soap = (@var19 = 'Y')
-AND trees = (@var20 = 'Y')
-AND wine = (@var21 = 'Y')
-AND coffee = (@var22 = 'Y')
-AND beans = (@var23 = 'Y')
-AND fruits = (@var24 = 'Y')
-AND grains = (@var25 = 'Y')
-AND juices = (@var26 = 'Y')
-AND mushrooms = (@var27 = 'Y')
-AND petfood = (@var28 = 'Y')
-AND tofu = (@var29 = 'Y')
-AND wildharvested = (@var30 = 'Y');
+-- SET organic = (@var1 = 'Y')
+-- AND bakedgoods = (@var2 = 'Y')
+-- AND cheese = (@var3 = 'Y')
+-- AND crafts = (@var4 = 'Y')
+-- AND flowers = (@var5 = 'Y')
+-- AND eggs = (@var6 = 'Y')
+-- AND seafood = (@var7 = 'Y')
+-- AND herbs = (@var8 = 'Y')
+-- AND vegetables = (@var9 = 'Y')
+-- AND honey = (@var10 = 'Y')
+-- AND jams = (@var11 = 'Y')
+-- AND maple = (@var12 = 'Y')
+-- AND meat = (@var13 = 'Y')
+-- AND nursery = (@var14 = 'Y')
+-- AND nuts = (@var15 = 'Y')
+-- AND plants = (@var16 = 'Y')
+-- AND poultry = (@var17 = 'Y')
+-- AND prepared = (@var18 = 'Y')
+-- AND soap = (@var19 = 'Y')
+-- AND trees = (@var20 = 'Y')
+-- AND wine = (@var21 = 'Y')
+-- AND coffee = (@var22 = 'Y')
+-- AND beans = (@var23 = 'Y')
+-- AND fruits = (@var24 = 'Y')
+-- AND grains = (@var25 = 'Y')
+-- AND juices = (@var26 = 'Y')
+-- AND mushrooms = (@var27 = 'Y')
+-- AND petfood = (@var28 = 'Y')
+-- AND tofu = (@var29 = 'Y')
+-- AND wildharvested = (@var30 = 'Y');
 SHOW WARNINGS;
 SELECT * FROM farmers;
