@@ -137,7 +137,7 @@ public class farmerdetail extends HttpServlet {
       }
       con = DriverManager.getConnection(url, "admin", "f3ck");
       position = "submit review form";
-      query = "SELECT * " + 
+      query = "SELECT name, review " + 
               "FROM farmerdata.reviews ;";
       // resultTable = new StringBuffer("<table>");
       ResultSetMetaData resultSetMetaData;
