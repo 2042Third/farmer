@@ -1,1 +1,94 @@
-"<button onclick=\"getLocation()\" class=\"primary\">Get My Location</button>"+"<button onclick=\"getLocationFixed()\" class=\"primary\">Use RPI Location</button>"+"<button onclick=\"getLocationFixedTable()\" class=\"primary\">Use RPI Location Update the table</button>"+"  <p id=geo></p>"+"<script>"+"var x = document.getElementById(\"geo\");"+"var table, tr;"+"  // input = document.getElementById(\"myInput\");"+"  // filter = input.value.toUpperCase();"+""+"function getLocation() {"+"  if (navigator.geolocation) {"+"    navigator.geolocation.getCurrentPosition(showPosition, showError);"+"  } else { "+"    x.innerHTML = \"Geolocation is not supported by this browser.\";"+"  }"+"}"+"function showPosition(position) {"+"    x.innerHTML = \"Latitude: \" + position.coords.latitude + "+"    \"<br>Longitude: \" + position.coords.longitude;"+""+"  }"+"function getLocationFixed() {"+"  a = 42.73840006302369;"+"  b=-73.69101901260044;"+"  c=41;"+"  d=-71;"+"  x.innerHTML = \"Latitude: \" + a+ "+"  \"<br>Longitude: \" + b+"+"  \"<br>Distence: \"+calcCrow(a,b,c,d);"+"}"+"function getLocationFixedTable() {"+"  a = 42.73840006302369;"+"  b=-73.69101901260044;"+"  // updateTable();"+"  var table = document.getElementById(\"farmertable\");"+"  for (var i = 0, row; row = table.rows[i]; i++) {"+"     //iterate through rows"+"     //rows would be accessed using the \"row\" variable assigned in the for loop"+"     for (var j = 0, col; col = row.cells[j]; j++) {"+"       //iterate through columns"+"       if(j==6 ){"+"          c = parseFloat(col.innerText);"+"        }"+"       if(j==7){"+"          d = parseFloat(col.innerText);"+"          out = calcCrow(a,b,d,c);"+"          // console.log(j+\" \"+out+\" dist\n\");"+"          row.cells[4].innerText = out.toFixed(1);"+"        }"+"       //columns would be accessed using the \"col\" variable assigned in the for loop"+"     }  "+"  }"+"}"+""+"  "+"  function calcCrow(lat1, lon1, lat2, lon2) "+"  {"+"    var R = 6371; // km"+"    var dLat = toRad(lat2-lat1);"+"    var dLon = toRad(lon2-lon1);"+"    var lat1 = toRad(lat1);"+"    var lat2 = toRad(lat2);"+""+"    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +"+"      Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); "+"    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); "+"    var d = R * c;"+"    return d;"+"  }"+""+"  // Converts numeric degrees to radians"+"  function toRad(Value) "+"  {"+"      return Value * Math.PI / 180;"+"  }"+""+"  function showError(error) {"+"    switch(error.code) {"+"      case error.PERMISSION_DENIED:"+"        x.innerHTML = \"User denied the request for Geolocation.\""+"        break;"+"      case error.POSITION_UNAVAILABLE:"+"        x.innerHTML = \"Location information is unavailable.\""+"        break;"+"      case error.TIMEOUT:"+"        x.innerHTML = \"The request to get user location timed out.\""+"        break;"+"      case error.UNKNOWN_ERROR:"+"        x.innerHTML = \"An unknown error occurred.\""+"        break;"+"    }"+"  }"+"  </script>"
+"<button onclick=\"getLocation()\" class=\"primary\">Get My Location</button>\n"+
+"<button onclick=\"getLocationFixed()\" class=\"primary\">Use RPI Location</button>\n"+
+"<button onclick=\"getLocationFixedTable()\" class=\"primary\">Use RPI Location Update the table</button>\n"+
+"  <p id=geo></p>\n"+
+"<script>\n"+
+"var x = document.getElementById(\"geo\");\n"+
+"var table, tr;\n"+
+"  // input = document.getElementById(\"myInput\");\n"+
+"  // filter = input.value.toUpperCase();\n"+
+"\n"+
+"function getLocation() {\n"+
+"  if (navigator.geolocation) {\n"+
+"    navigator.geolocation.getCurrentPosition(showPosition, showError);\n"+
+"  } else { \n"+
+"    x.innerHTML = \"Geolocation is not supported by this browser.\";\n"+
+"  }\n"+
+"}\n"+
+"function showPosition(position) {\n"+
+"    x.innerHTML = \"Latitude: \" + position.coords.latitude + \n"+
+"    \"<br>Longitude: \" + position.coords.longitude;\n"+
+"\n"+
+"  }\n"+
+"function getLocationFixed() {\n"+
+"  a = 42.73840006302369;\n"+
+"  b=-73.69101901260044;\n"+
+"  c=41;\n"+
+"  d=-71;\n"+
+"  x.innerHTML = \"Latitude: \" + a+ \n"+
+"  \"<br>Longitude: \" + b+\n"+
+"  \"<br>Distence: \"+calcCrow(a,b,c,d);\n"+
+"}\n"+
+"function getLocationFixedTable() {\n"+
+"  a = 42.73840006302369;\n"+
+"  b=-73.69101901260044;\n"+
+"  // updateTable();\n"+
+"  var table = document.getElementById(\"farmertable\");\n"+
+"  for (var i = 0, row; row = table.rows[i]; i++) {\n"+
+"     //iterate through rows\n"+
+"     //rows would be accessed using the \"row\" variable assigned in the for loop\n"+
+"     for (var j = 0, col; col = row.cells[j]; j++) {\n"+
+"       //iterate through columns\n"+
+"       if(j==6 ){\n"+
+"          c = parseFloat(col.innerText);\n"+
+"        }\n"+
+"       if(j==7){\n"+
+"          d = parseFloat(col.innerText);\n"+
+"          out = calcCrow(a,b,d,c);\n"+
+"          // console.log(j+\" \"+out+\" dist\n\");\n"+
+"          row.cells[4].innerText = out.toFixed(1);\n"+
+"        }\n"+
+"       //columns would be accessed using the \"col\" variable assigned in the for loop\n"+
+"     }  \n"+
+"  }\n"+
+"}\n"+
+"\n"+
+"  \n"+
+"  function calcCrow(lat1, lon1, lat2, lon2) \n"+
+"  {\n"+
+"    var R = 6371; // km\n"+
+"    var dLat = toRad(lat2-lat1);\n"+
+"    var dLon = toRad(lon2-lon1);\n"+
+"    var lat1 = toRad(lat1);\n"+
+"    var lat2 = toRad(lat2);\n"+
+"\n"+
+"    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +\n"+
+"      Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); \n"+
+"    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); \n"+
+"    var d = R * c;\n"+
+"    return d;\n"+
+"  }\n"+
+"\n"+
+"  // Converts numeric degrees to radians\n"+
+"  function toRad(Value) \n"+
+"  {\n"+
+"      return Value * Math.PI / 180;\n"+
+"  }\n"+
+"\n"+
+"  function showError(error) {\n"+
+"    switch(error.code) {\n"+
+"      case error.PERMISSION_DENIED:\n"+
+"        x.innerHTML = \"User denied the request for Geolocation.\"\n"+
+"        break;\n"+
+"      case error.POSITION_UNAVAILABLE:\n"+
+"        x.innerHTML = \"Location information is unavailable.\"\n"+
+"        break;\n"+
+"      case error.TIMEOUT:\n"+
+"        x.innerHTML = \"The request to get user location timed out.\"\n"+
+"        break;\n"+
+"      case error.UNKNOWN_ERROR:\n"+
+"        x.innerHTML = \"An unknown error occurred.\"\n"+
+"        break;\n"+
+"    }\n"+
+"  }\n"+
+"  </script>"
