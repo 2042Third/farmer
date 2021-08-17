@@ -299,11 +299,11 @@ public class farmerdetail extends HttpServlet {
           stat.setInt(1, id);
           
           try (ResultSet rs = stat.executeQuery()) {
-            response.getWriter().append("<h2>"+"Portfolio of farmer "+rs.getString("name")+"</h2>");
             System.out.println("Executed the following SQL statement for id "+id+" : ");
             System.out.println(query);
 
             rs.next();
+            response.getWriter().append("<h2>"+"Portfolio of farmer "+rs.getString("name")+"</h2>");
             if(rs == null)
               return;
             resultSetMetaData = rs.getMetaData();
