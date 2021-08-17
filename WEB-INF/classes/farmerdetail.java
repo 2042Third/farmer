@@ -66,8 +66,8 @@ public class farmerdetail extends HttpServlet {
         "");
 
     get_textarea(id,message,user_name,response);
+    get_review(id,message,user_name,response);
     get_from_sql(id, response);
-    get_pager( request,response);
     response.getWriter().append(formtail);
     //END
     response.getWriter().append("</body></html>");
@@ -78,6 +78,68 @@ public class farmerdetail extends HttpServlet {
    * */
   public void get_pager(HttpServletRequest request ,HttpServletResponse response){
     
+  }
+  /**
+   * Get the text area of a farmer
+   * @param id id of the farmer
+   * @param message the input review
+   * @param user_name the name of the user who wrote reviews
+   * @param response http get response object
+   * */
+  public void get_review (Integer id, String message, String user_name, HttpServletResponse response){
+    String position = "start-up";
+    Preferences root  = Preferences.userRoot();
+    Preferences node = Preferences.userNodeForPackage(this.getClass());
+    String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
+
+    Connection con = null;
+    try{
+      con = DriverManager.getConnection(url, "admin", "f3ck");
+      position = "submit review form";
+      query = "SELECT name, review " + 
+              "FROM farmerdata.reviews ;";
+      // resultTable = new StringBuffer("<table>");
+      ResultSetMetaData resultSetMetaData;
+      PreparedStatement stat1 = con.prepareStatement(query);
+      // stat1.setString(1, id.toString());
+      response.getWriter().append("<table>");
+        
+      ResultSet rs1 = stat1.executeQuery();
+      //START TABLE
+
+      // System.out.println("Executed the following SQL statement for name  "+id+" : ");
+      System.out.println("Executed the following SQL statement  ");
+      System.out.println(query);
+      while(rs1.next()){
+        resultTable.append("<tr><td>"+rs1.getString("name")+"</td><td>"+rs1.getString("review")+"</td></tr>");
+        resultTable.append("<tr><td>"+"</td><td>"+"</td></tr>");
+      }
+      //END TABLE
+      response.getWriter().append("</table>");
+    }
+    catch (SQLException ex) {
+      for (Throwable t : ex)
+        System.out.println(t.getMessage());
+      System.out.println("Opening connection unsuccessful!");
+    }
+    catch(Exception e){
+      System.out.println("get review fucked at "+position);
+    }
+    finally{
+      finally {
+        node.put("MySQLConnection", url);
+        if (con != null) {
+          try {
+            con.close();
+          }
+          catch (SQLException ex) {
+            for (Throwable t : ex)
+              System.out.println(t.getMessage());
+            System.out.println("Closing connection unsuccessful!");
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -124,38 +186,9 @@ public class farmerdetail extends HttpServlet {
         position = "after stat";
         stat.executeUpdate();
         node.put("MySQLConnection", url);
-        if (con != null) {
-          try {
-            con.close();
-          }
-          catch (SQLException ex) {
-            for (Throwable t : ex)
-              System.out.println(t.getMessage());
-            System.out.println("Closing connection unsuccessful!");
-          }
-        }
-      }
-      con = DriverManager.getConnection(url, "admin", "f3ck");
-      position = "submit review form";
-      query = "SELECT name, review " + 
-              "FROM farmerdata.reviews ;";
-      // resultTable = new StringBuffer("<table>");
-      ResultSetMetaData resultSetMetaData;
-      PreparedStatement stat1 = con.prepareStatement(query);
-      // stat1.setString(1, id.toString());
-      response.getWriter().append("<table>");
         
-      ResultSet rs1 = stat1.executeQuery();
-      //START TABLE
-
-      System.out.println("Executed the following SQL statement for name  "+id+" : ");
-      System.out.println(query);
-      while(rs1.next()){
-        resultTable.append("<tr><td>"+rs1.getString("name")+"</td><td>"+rs1.getString("review")+"</td></tr>");
-        resultTable.append("<tr><td>"+"</td><td>"+"</td></tr>");
       }
-      //END TABLE
-      response.getWriter().append("</table>");
+      
       
     }
     catch(Exception e){
