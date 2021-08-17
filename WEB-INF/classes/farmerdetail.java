@@ -97,6 +97,7 @@ public class farmerdetail extends HttpServlet {
         String query = "SELECT *" + 
                 "FROM farmerdata.farmers WHERE id=?;";
         resultTable = new StringBuffer("<table>");
+        ResultSetMetaData resultSetMetaData;
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setString(1, id);
           
@@ -104,9 +105,9 @@ public class farmerdetail extends HttpServlet {
             System.out.println("Executed the following SQL statement:");
             System.out.println(query);
             // while (rs.next()) {
-            for (String i: rs.getArray(0))
-            // }
-            ResultSetMetaData resultSetMetaData = rs.getMetaData();
+            // for (String i: rs.getArray(0))
+            // }  
+            resultSetMetaData = rs.getMetaData();
             for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
               resultTable.append("<tr><td>"+i+"</td><td>"+rs.getString(i)+"</td></tr>");
 
