@@ -188,8 +188,4 @@ public class Farmer extends HttpServlet {
         System.out.println("get writer fucked");
       }
     }
-  
-
-
-
 }

@@ -111,7 +111,7 @@ public class farmerdetail extends HttpServlet {
       
       //If there is any message
       if(message.length()!=0 && user_name.length()!=0){
-        query = "INSERT INTO farmerdata.reviews SET  name=? , score=? , review=? , review1=? ;";
+        query = "INSERT INTO farmerdata.reviews SET name=? , score=? , review=? , review1=? ;";
         PreparedStatement stat = con.prepareStatement(query);
         stat.setString(1, id+"");
         stat.setString(2, "5");
