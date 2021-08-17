@@ -153,6 +153,10 @@ public class Farmer extends HttpServlet {
           System.out.println(t.getMessage());
         System.out.println("Opening connection unsuccessful!");
       }
+      catch(Exception e){
+        System.out.println("getWriter().append() failure");
+
+      }
       finally {
         node.put("MySQLConnection", url);
         if (con != null) {
