@@ -83,7 +83,7 @@ public class farmerdetail extends HttpServlet {
           "  background-color: #dddddd;\r\n" + 
           "}\r\n" + 
           "</style></head>"  );
-    response.getWriter().append("<h2>Geolocation</h2>\n"+
+    response.getWriter().append(""+
 "<p>\n"+
 "<button onclick=\"getLocation()\" class=\"primary\">Get My Location</button>\n"+
 "  <p id=geo></p>\n"+
@@ -310,7 +310,7 @@ public class farmerdetail extends HttpServlet {
             resultSetMetaData = rs.getMetaData();
             for (int i = 1; i<=58; i++) {
               resultTable.append("<tr><td>"+resultSetMetaData.getColumnName(i)+"</td><td>"+rs.getString(i)+"</td></tr>");
-              // System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
+              System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
                 
             }
             response.getWriter().append("<h2>"+"Portfolio of farmer "+rs.getString("name")+"</h2>");
