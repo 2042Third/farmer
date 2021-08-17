@@ -100,11 +100,11 @@ public class farmerdetail extends HttpServlet {
     Preferences node = Preferences.userNodeForPackage(this.getClass());
     String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
     Connection con = null;
-    
+    String position = "message processing";
     try{
       con = DriverManager.getConnection(url, "admin", "f3ck");
       String query;
-      String position = "message processing";
+      
       //If there is any message
       if(message.length()!=0 && user_name.length()!=0){
         query = "INSERT INTO farmerdata.farmers (name, score, review, review1) " + 
