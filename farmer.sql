@@ -114,3 +114,10 @@ LINES TERMINATED BY '\n' (id, name,
 -- AND wildharvested = (@var30 = 'Y');
 SHOW WARNINGS;
 SELECT * FROM farmers;
+
+CREATE TABLE `reviews`(
+  `name` VARCHAR(255) DEFAULT NULL,
+  `score` VARCHAR(255) DEFAULT NULL,
+  `review` TEXT DEFAULT NULL,
+  `review1` VARCHAR(255) DEFAULT NULL,
+);
