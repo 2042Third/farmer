@@ -121,9 +121,9 @@ public class Farmer extends HttpServlet {
         con = DriverManager.getConnection(url, "admin", "f3ck");
         String query = "SELECT *" + 
                 "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ? LIMIT 20 OFFSET ? ;";
-        response.getWriter().append("<button onclick=\"getLocation()\" class=\"primary\">Get My Location</button>\n"+
-"<button onclick=\"getLocationFixed()\" class=\"primary\">Use RPI Location</button>\n"+
-"<button onclick=\"getLocationFixedTable()\" class=\"primary\">Use RPI Location Update the table</button>\n"+
+        response.getWriter().append("<button type=\"button\" onclick=\"getLocation()\" class=\"primary\">Get My Location</button>\n"+
+"<button type=\"button\" onclick=\"getLocationFixed()\" class=\"primary\">Use RPI Location</button>\n"+
+"<button type=\"button\" onclick=\"getLocationFixedTable()\" class=\"primary\">Use RPI Location Update the table</button>\n"+
 "  <p id=geo></p>\n"+
 "<script>\n"+
 "var x = document.getElementById(\"geo\");\n"+
