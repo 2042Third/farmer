@@ -60,10 +60,8 @@ public class farmerdetail extends HttpServlet {
         title_name+
         "");
 
-    if(state.length()==0 && city.length()==0)
-      System.out.print("First enter");
-    else
-      get_from_sql(page,state, city, response);
+    
+    get_from_sql(page, response);
     get_pager(page, request,response);
     response.getWriter().append(formtail);
     //END
@@ -95,11 +93,9 @@ public class farmerdetail extends HttpServlet {
    * return the result to ResultSet.
    * 
    * @param page page number
-   * @param state state
-   * @param city city
    * @param response the response
    * */
-  public void get_from_sql(Integer page,String state, String city,HttpServletResponse response){
+  public void get_from_sql(Integer page,HttpServletResponse response){
       Preferences root  = Preferences.userRoot();
       Preferences node = Preferences.userNodeForPackage(this.getClass());
       String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
