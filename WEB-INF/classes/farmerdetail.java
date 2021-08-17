@@ -158,6 +158,16 @@ public class farmerdetail extends HttpServlet {
       //END TABLE
       response.getWriter().append("</table>");
       
+      if (con1 != null) {
+        try {
+          con1.close();
+        }
+        catch (SQLException ex) {
+          for (Throwable t : ex)
+            System.out.println(t.getMessage());
+          System.out.println("Closing connection unsuccessful!");
+        }
+      }
     }
     catch(Exception e){
       System.out.println("get textarea failure at "+ position);
@@ -175,16 +185,6 @@ public class farmerdetail extends HttpServlet {
         }
       }
 
-      if (con1 != null) {
-        try {
-          con1.close();
-        }
-        catch (SQLException ex) {
-          for (Throwable t : ex)
-            System.out.println(t.getMessage());
-          System.out.println("Closing connection unsuccessful!");
-        }
-      }
     }
   }
 
