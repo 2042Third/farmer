@@ -276,8 +276,8 @@ public class farmerdetail extends HttpServlet {
       try
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
-        String query = "SELECT * " + 
-                "FROM farmerdata.farmers WHERE id=?; ";
+        String query = "select * " + 
+                "from farmerdata.farmers where id=?; ";
         resultTable = new StringBuffer("<table>");
         ResultSetMetaData resultSetMetaData;
         try (PreparedStatement stat = con.prepareStatement(query)) {
