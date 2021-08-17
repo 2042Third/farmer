@@ -83,7 +83,7 @@ public class farmerdetail extends HttpServlet {
    * @param page page number
    * @param response the response
    * */
-  public void get_from_sql(Integer page,HttpServletResponse response){
+  public void get_from_sql(HttpServletResponse response){
       Preferences root  = Preferences.userRoot();
       Preferences node = Preferences.userNodeForPackage(this.getClass());
       String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
