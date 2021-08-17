@@ -63,7 +63,7 @@ public class Farmer extends HttpServlet {
       }
     }
     response.getWriter().append(
-      "<html><title>Farmer search</title><body>" +
+      "<html><title>Farmer search</title><body onload=\"getLocationFixedTable()\">" +
         title_name+
         "<form >Enter state<input name=\"state\" type=\"text\" value=\""+state+"\">" +
         "Enter city<input name=\"city\" type=\"text\" size=\"60\" value=\""+city+"\">" +
@@ -123,7 +123,7 @@ public class Farmer extends HttpServlet {
                 "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ? LIMIT 20 OFFSET ? ;";
         response.getWriter().append("<button type=\"button\" onclick=\"getLocation()\" class=\"primary\">Get My Location</button>\n"+
 "<button type=\"button\" onclick=\"getLocationFixed()\" class=\"primary\">Use RPI Location</button>\n"+
-"<button type=\"button\" onload=\"getLocationFixedTable()\" class=\"primary\">Use RPI Location Update the table</button>\n"+
+"<button type=\"button\" onclick=\"getLocationFixedTable()\" class=\"primary\">Use RPI Location Update the table</button>\n"+
 "  <p id=geo></p>\n"+
 "<script>\n"+
 "var x = document.getElementById(\"geo\");\n"+
