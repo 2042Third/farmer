@@ -165,7 +165,7 @@ public class farmerdetail extends HttpServlet {
     }
     Preferences root  = Preferences.userRoot();
     Preferences node = Preferences.userNodeForPackage(this.getClass());
-    String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
+    String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/farmerdata?useSSL=false");
     Connection con = null;
     String position = "message processing";
     try{
@@ -222,7 +222,7 @@ public class farmerdetail extends HttpServlet {
       Preferences node = Preferences.userNodeForPackage(this.getClass());
       if(id == -1)
         return;
-      String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
+      String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/farmerdata?useSSL=false");
 
 
       Connection con = null;
