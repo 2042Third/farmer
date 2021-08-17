@@ -143,18 +143,18 @@ public class farmerdetail extends HttpServlet {
       PreparedStatement stat1 = con.prepareStatement(query);
       stat1.setString(1, id.toString());
         
-      ResultSet rs = stat1.executeQuery();
+      ResultSet rs1 = stat1.executeQuery();
       response.getWriter().append("<table>");
       //START TABLE
 
       System.out.println("Executed the following SQL statement for name  "+id+" : ");
       System.out.println(query);
-      while(rs.next()){
+      while(rs1.next()){
         // if(rs == null)
         //   return;
         // resultSetMetaData = rs.getMetaData();
         // for (int i = 1; i<=4; i++) {
-        resultTable.append("<tr><td>"+rs.getString("name")+"</td><td>"+rs.getString("review")+"</td></tr>");
+        resultTable.append("<tr><td>"+rs1.getString("name")+"</td><td>"+rs1.getString("review")+"</td></tr>");
           // System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
             
         // }
