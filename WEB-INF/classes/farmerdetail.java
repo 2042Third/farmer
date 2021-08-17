@@ -61,8 +61,8 @@ public class farmerdetail extends HttpServlet {
         "");
 
     
-    get_from_sql(page, response);
-    get_pager(page, request,response);
+    get_from_sql( response);
+    get_pager( request,response);
     response.getWriter().append(formtail);
     //END
     response.getWriter().append("</body></html>");
@@ -71,20 +71,8 @@ public class farmerdetail extends HttpServlet {
    * Implements pagination
    * 
    * */
-  public void get_pager(Integer page,HttpServletRequest request ,HttpServletResponse response){
-    try{
-
-      if(page <= 0)
-        response.getWriter().append("<button type=\"submit\"name=\"page\" value=0 size=\"90\" disabled><</button>");
-      else
-        response.getWriter().append("<button type=\"submit\"name=\"page\"  value="+(page-1)+" size=\"90\" ><</button>");
-      response.getWriter().append(" page "+page+" out of "+
-        "<button type=\"submit\" name=\"page\"  value="+(page+1)+" size=\"90\" >></button>"
-        );
-    }
-    catch(Exception e){
-      System.out.println("ok, bad getwriter");
-    }
+  public void get_pager(HttpServletRequest request ,HttpServletResponse response){
+    
   }
 
   /**
@@ -116,7 +104,7 @@ public class farmerdetail extends HttpServlet {
             System.out.println("Executed the following SQL statement:");
             System.out.println(query);
             // while (rs.next()) {
-            for (String i: rs.getArray())
+            for (String i: rs.getArray(0))
               resultTable.append("<tr><td>"+i+"</td><td>"+i+"</td></tr>");
             // }
           }
