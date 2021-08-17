@@ -119,6 +119,9 @@ public class farmerdetail extends HttpServlet {
             }
             response.getWriter().append("<h2>"+"Portfolio of farmer "+rs.getString("name")+"</h2>");
           }
+          catch(Exception e){
+            System.out.println("get writer fucked");
+          }
           resultTable.append("</table>");
         }
       }
