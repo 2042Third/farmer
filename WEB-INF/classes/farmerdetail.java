@@ -88,14 +88,18 @@ public class farmerdetail extends HttpServlet {
    * @param response http get response object
    * */
   public void get_textarea(Integer id, String message, String user_name, HttpServletResponse response){
-
-    response.getWriter().append("<p>Write a review:</p>");
-    response.getWriter().append("<form>");
-    response.getWriter().append("<textarea name=\"user_name\" ></textarea>");
-    response.getWriter().append("<textarea name=\"message\" rows=\"10\" cols=\"30\"></textarea>");
-    response.getWriter().append("<br><br>");
-    response.getWriter().append("<input type=\"submit\">");
-    response.getWriter().append("</form>");
+    try{
+      response.getWriter().append("<p>Write a review:</p>");
+      response.getWriter().append("<form>");
+      response.getWriter().append("<textarea name=\"user_name\" ></textarea>");
+      response.getWriter().append("<textarea name=\"message\" rows=\"10\" cols=\"30\"></textarea>");
+      response.getWriter().append("<br><br>");
+      response.getWriter().append("<input type=\"submit\">");
+      response.getWriter().append("</form>");
+    }
+    catch(Exception e){
+      System.out.println("Initial text area failure.");
+    }
     Preferences root  = Preferences.userRoot();
     Preferences node = Preferences.userNodeForPackage(this.getClass());
     String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
