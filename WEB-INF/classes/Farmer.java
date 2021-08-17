@@ -168,7 +168,7 @@ public class Farmer extends HttpServlet {
 "       if(j==7){\n"+
 "          d = parseFloat(col.innerText);\n"+
 "          out = calcCrow(a,b,d,c);\n"+
-"          // console.log(j+\" \"+out+\" dist\n\");\n"+
+"          // console.log(j+\" \"+out+\" dist\");\n"+
 "          row.cells[4].innerText = out.toFixed(1);\n"+
 "        }\n"+
 "       //columns would be accessed using the \"col\" variable assigned in the for loop\n"+
