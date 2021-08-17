@@ -121,7 +121,17 @@ public class farmerdetail extends HttpServlet {
         stat.setString(4, user_name);
         position = "after stat";
         ResultSet rs = stat.executeQuery();
-
+        node.put("MySQLConnection", url);
+        if (con != null) {
+          try {
+            con.close();
+          }
+          catch (SQLException ex) {
+            for (Throwable t : ex)
+              System.out.println(t.getMessage());
+            System.out.println("Closing connection unsuccessful!");
+          }
+        }
       }
       position = "submit review form";
       query = "SELECT * " + 
