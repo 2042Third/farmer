@@ -83,7 +83,44 @@ public class farmerdetail extends HttpServlet {
           "  background-color: #dddddd;\r\n" + 
           "}\r\n" + 
           "</style></head>"  );
-    response.getWriter().append("<body><h2>Geolocation</h2><p><button onclick=\"getLocation()\" >Get My Location</button> <p id=geo></p><script>var x = document.getElementById(\"geo\");function getLocation() { if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(showPosition, showError); } else { x.innerHTML = \"Geolocation is not supported by this browser.\"; }}function showPosition(position) { x.innerHTML = \"Latitude: \" + position.coords.latitude + \"<br>Longitude: \" + position.coords.longitude;}function showError(error) { switch(error.code) { case error.PERMISSION_DENIED: x.innerHTML = \"User denied the request for Geolocation.\" break; case error.POSITION_UNAVAILABLE: x.innerHTML = \"Location information is unavailable.\" break; case error.TIMEOUT: x.innerHTML = \"The request to get user location timed out.\" break; case error.UNKNOWN_ERROR: x.innerHTML = \"An unknown error occurred.\" break; }}</script><button onclick=\"getLocation()\" >Get My Location</button></p>");
+    response.getWriter().append("<h2>Geolocation</h2>\n"+
+"<p>\n"+
+"<button onclick=\"getLocation()\" class=\"primary\">Get My Location</button>\n"+
+"  <p id=geo></p>\n"+
+"<script>\n"+
+"var x = document.getElementById(\"geo\");\n"+
+"\n"+
+"function getLocation() {\n"+
+"  if (navigator.geolocation) {\n"+
+"    navigator.geolocation.getCurrentPosition(showPosition, showError);\n"+
+"  } else { \n"+
+"    x.innerHTML = \"Geolocation is not supported by this browser.\";\n"+
+"  }\n"+
+"}\n"+
+"\n"+
+"function showPosition(position) {\n"+
+"  x.innerHTML = \"Latitude: \" + position.coords.latitude + \n"+
+"  \"<br>Longitude: \" + position.coords.longitude;\n"+
+"}\n"+
+"\n"+
+"function showError(error) {\n"+
+"  switch(error.code) {\n"+
+"    case error.PERMISSION_DENIED:\n"+
+"      x.innerHTML = \"User denied the request for Geolocation.\"\n"+
+"      break;\n"+
+"    case error.POSITION_UNAVAILABLE:\n"+
+"      x.innerHTML = \"Location information is unavailable.\"\n"+
+"      break;\n"+
+"    case error.TIMEOUT:\n"+
+"      x.innerHTML = \"The request to get user location timed out.\"\n"+
+"      break;\n"+
+"    case error.UNKNOWN_ERROR:\n"+
+"      x.innerHTML = \"An unknown error occurred.\"\n"+
+"      break;\n"+
+"  }\n"+
+"}\n"+
+"</script>\n"+
+"</p>");
     get_textarea(id,message,user_name,response);
     get_review(id,message,user_name,response);
     get_from_sql(id, response);
