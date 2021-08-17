@@ -144,53 +144,6 @@ public class farmerdetail extends HttpServlet {
 
     
 
-    // Connection con = null;
-    // try{
-    //   con = DriverManager.getConnection(url, "admin", "f3ck");
-    //   position = "submit review form";
-    //   String query = "SELECT name, score, review, review1 " + 
-    //           "FROM farmerdata.reviews WHERE name=?;";
-    //   // resultTable = new StringBuffer("<table>");
-    //   ResultSetMetaData resultSetMetaData;
-
-    //   PreparedStatement stat1 = con.prepareStatement(query);
-    //   stat1.setString(1, id.toString());
-    //   response.getWriter().append("<table>");
-        
-    //   ResultSet rs1 = stat1.executeQuery();
-    //   //START TABLE
-
-    //   // System.out.println("Executed the following SQL statement for name  "+id+" : ");
-    //   System.out.println("Executed the following SQL statement  ");
-    //   System.out.println(query);
-    //   while(rs1.next()){
-    //     resultTable.append("<tr><td>"+rs1.getString("name")+"</td><td>"+rs1.getString("review")+"</td></tr>");
-    //     resultTable.append("<tr><td>"+"</td><td>"+"</td></tr>");
-    //   }
-    //   //END TABLE
-    //   response.getWriter().append("</table>");
-    // }
-    // catch (SQLException ex) {
-    //   for (Throwable t : ex)
-    //     System.out.println(t.getMessage());
-    //   System.out.println("Opening connection unsuccessful!");
-    // }
-    // catch(Exception e){
-    //   System.out.println("get review fucked at "+position);
-    // }
-    // finally {
-    //   node.put("MySQLConnection", url);
-    //   if (con != null) {
-    //     try {
-    //       con.close();
-    //     }
-    //     catch (SQLException ex) {
-    //       for (Throwable t : ex)
-    //         System.out.println(t.getMessage());
-    //       System.out.println("Closing connection unsuccessful!");
-    //     }
-    //   }
-    // }
     
   }
 
@@ -205,8 +158,8 @@ public class farmerdetail extends HttpServlet {
     try{
       response.getWriter().append("<p>Write a review:</p>");
       response.getWriter().append("<form>");
-      response.getWriter().append("<textarea name=\"user_name\" ></textarea>");
-      response.getWriter().append("<textarea name=\"message\" rows=\"10\" cols=\"30\"></textarea>");
+      response.getWriter().append("<p>Please Enter Your Name:</p><textarea name=\"user_name\" ></textarea></br>");
+      response.getWriter().append("<p>Review:</p><textarea name=\"message\" rows=\"10\" cols=\"30\"></textarea>");
       response.getWriter().append("<br><br>");
       response.getWriter().append("<input type=\"submit\">");
       response.getWriter().append("<input type=\"hidden\" name=\"id\" value=\""+id+"\">");
