@@ -217,7 +217,7 @@ public class Farmer extends HttpServlet {
 "  </script>");
         resultTable = new StringBuffer("<table id=\"farmertable\">"+
         "<tr><th>Name</th><th>City/County</th><th>State</th>" +
-        "<th>Reviews</th><th>website</th><th>Detail</th></tr>");
+        "<th>Reviews</th><th>Distence</th><th>Detail</th></tr>");
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setString(1, state+"%");
           stat.setString(2, city+"%");
