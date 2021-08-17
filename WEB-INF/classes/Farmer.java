@@ -132,14 +132,14 @@ public class Farmer extends HttpServlet {
             System.out.println("Executed the following SQL statement:");
             System.out.println(query);
             while (rs.next()) {
-              resultTable.append("<tr><td>").append(rs.getString(1)).
+              resultTable.append("<tr><td>").append(rs.getString("name")).
                 append("</td><td>").append(rs.getString("city")+", "+rs.getString("county")).
                 append("</td><td>").append(rs.getString("state")).
                 append("</td><td>").append(rs.getString("reviewscore")+"/5 ("+rs.getString("reviewcount")+")").
                 append("</td><td>").append(rs.getString("website")).
                 append("</td><td>").append("<a href=\"/farmer/farmerdetail?id="+rs.getString("id")+"\" >detail</a>").
-                append("</td><td style=\"display:none;\">").append(rs.getString("x")).
-                append("</td><td style=\"display:none;\">").append(rs.getString("y")).
+                // append("</td><td style=\"display:none;\">").append(rs.getString("x")).
+                // append("</td><td style=\"display:none;\">").append(rs.getString("y")).
 
                 append("</td></tr>");
             }
