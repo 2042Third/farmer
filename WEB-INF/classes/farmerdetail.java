@@ -140,7 +140,7 @@ public class farmerdetail extends HttpServlet {
       // resultTable = new StringBuffer("<table>");
       ResultSetMetaData resultSetMetaData;
       PreparedStatement stat = con.prepareStatement(query);
-      stat.setInt(1, id);
+      stat.setString(1, id+"");
         
       ResultSet rs = stat.executeQuery();
       response.getWriter().append("<table>");
