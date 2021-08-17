@@ -140,10 +140,10 @@ public class farmerdetail extends HttpServlet {
               "FROM farmerdata.reviews WHERE name=?;";
       // resultTable = new StringBuffer("<table>");
       ResultSetMetaData resultSetMetaData;
-      PreparedStatement stat = con.prepareStatement(query);
-      stat.setString(1, id.toString());
+      PreparedStatement stat1 = con.prepareStatement(query);
+      stat1.setString(1, id.toString());
         
-      ResultSet rs = stat.executeQuery();
+      ResultSet rs = stat1.executeQuery();
       response.getWriter().append("<table>");
       //START TABLE
 
