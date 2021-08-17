@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class farmerdetail extends HttpServlet {
   private static final long serialVersionUID = 1L;
   public HelloUserGet a;
-  public String title_name = "<h2></h2><p>New search</p>";
+  public String title_name = "<h2></h2>";
   public String formtail = "</form>";
   public StringBuffer resultTable = new StringBuffer();
   public String current_url = "192.168.1.28:8080/";
@@ -57,7 +57,6 @@ public class farmerdetail extends HttpServlet {
     }
     response.getWriter().append(
       "<html><title>Farmer detail</title><body>" +
-        title_name+
         "");
 
     
@@ -118,6 +117,7 @@ public class farmerdetail extends HttpServlet {
               System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
                 
             }
+            response.getWriter().append("<h2>"+"Portfolio of farmer "+rs.getString("name")+"</h2>");
           }
           resultTable.append("</table>");
         }
