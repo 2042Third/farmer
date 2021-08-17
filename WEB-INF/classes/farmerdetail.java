@@ -99,19 +99,18 @@ public class farmerdetail extends HttpServlet {
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
         String query = "select * " + 
-                "from farmerdata.reviews ;";
+                "from farmerdata.reviews where name=?;";
         response.getWriter().append("<table>"+
-        "<tr><th>Name</th><th>City/County</th><th>State</th>" +
-        "<th>Reviews</th><th>website</th><th>Detail</th></tr>");
+        "");
         try (PreparedStatement stat = con.prepareStatement(query)) {
-          
+          stat.setString(1, id.toString());
           try (ResultSet rs = stat.executeQuery()) {
             System.out.println("Executed the following SQL statement:");
             System.out.println(query);
             while (rs.next()) {
-              System.out.println("Retriving lines of review");
-              response.getWriter().append("<tr><td>").append(rs.getString(1)).
-                append("</td><td>").append("<a href=\"/farmer/farmerdetail?id="+rs.getString("name")+"\" >detail</a>").
+              // System.out.println("Retriving lines of review");
+              response.getWriter().append("<tr><td>").append(rs.getString("review1")).
+                append("</td><td>").append(rs.getString("review")).
                 append("</td></tr>");
             }
           }
