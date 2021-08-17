@@ -95,6 +95,7 @@ public class farmerdetail extends HttpServlet {
       response.getWriter().append("<textarea name=\"message\" rows=\"10\" cols=\"30\"></textarea>");
       response.getWriter().append("<br><br>");
       response.getWriter().append("<input type=\"submit\">");
+      response.getWriter().append("<input type=\"hidden\" name=\"id\" value=\""+id+"\">");
       response.getWriter().append("</form>");
     }
     catch(Exception e){
@@ -115,7 +116,7 @@ public class farmerdetail extends HttpServlet {
         position = "after query";
         PreparedStatement stat = con.prepareStatement(query);
         position = "after stat init";
-        stat.setString(1, id+"");
+        stat.setString(1, id.toString());
         stat.setString(2, "5");
         stat.setString(3, message);
         stat.setString(4, user_name);
