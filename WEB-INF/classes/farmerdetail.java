@@ -65,7 +65,25 @@ public class farmerdetail extends HttpServlet {
       "<!DOCTYPE html><html><title>Farmer detail</title><body>" +
         "");
     //Geolocation
-    response.getWriter().append("<h2>Geolocation</h2><p><button onclick=\"getLocation()\" class=\"primary\">Get My Location</button> <p id=geo></p><script>var x = document.getElementById(\"geo\"); function getLocation() { if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(showPosition, showError); } else { x.innerHTML = \"Geolocation is not supported by this browser.\"; }}function showPosition(position) { x.innerHTML = \"Latitude: \" + position.coords.latitude + \"<br>Longitude: \" + position.coords.longitude;}function showError(error) { switch(error.code) { case error.PERMISSION_DENIED: x.innerHTML = \"User denied the request for Geolocation.\" break; case error.POSITION_UNAVAILABLE: x.innerHTML = \"Location information is unavailable.\" break; case error.TIMEOUT: x.innerHTML = \"The request to get user location timed out.\" break; case error.UNKNOWN_ERROR: x.innerHTML = \"An unknown error occurred.\" break; }}</script></p>");
+    response.getWriter().append( 
+          "<head><style>\r\n" + 
+          "table {\r\n" + 
+          "  font-family: arial, sans-serif;\r\n" + 
+          "  border-collapse: collapse;\r\n" + 
+          "  width: 100%;\r\n" + 
+          "}\r\n" + 
+          "\r\n" + 
+          "td, th {\r\n" + 
+          "  border: 1px solid #dddddd;\r\n" + 
+          "  text-align: left;\r\n" + 
+          "  padding: 8px;\r\n" + 
+          "}\r\n" + 
+          "\r\n" + 
+          "tr:nth-child(even) {\r\n" + 
+          "  background-color: #dddddd;\r\n" + 
+          "}\r\n" + 
+          "</style><script>var x = document.getElementById(\"geo\"); function getLocation() { if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(showPosition, showError); } else { x.innerHTML = \"Geolocation is not supported by this browser.\"; }}function showPosition(position) { x.innerHTML = \"Latitude: \" + position.coords.latitude + \"<br>Longitude: \" + position.coords.longitude;}function showError(error) { switch(error.code) { case error.PERMISSION_DENIED: x.innerHTML = \"User denied the request for Geolocation.\" break; case error.POSITION_UNAVAILABLE: x.innerHTML = \"Location information is unavailable.\" break; case error.TIMEOUT: x.innerHTML = \"The request to get user location timed out.\" break; case error.UNKNOWN_ERROR: x.innerHTML = \"An unknown error occurred.\" break; }}</script></head>"  );
+    response.getWriter().append("<h2>Geolocation</h2><p><button onclick=\"getLocation()\" class=\"primary\">Get My Location</button> </p>");
     get_textarea(id,message,user_name,response);
     get_review(id,message,user_name,response);
     get_from_sql(id, response);
@@ -284,30 +302,6 @@ public class farmerdetail extends HttpServlet {
           }
         }
       }
-          // System.out.println("State is: " + state);
-        try{
-        response.getWriter().append( 
-          "<head><style>\r\n" + 
-          "table {\r\n" + 
-          "  font-family: arial, sans-serif;\r\n" + 
-          "  border-collapse: collapse;\r\n" + 
-          "  width: 100%;\r\n" + 
-          "}\r\n" + 
-          "\r\n" + 
-          "td, th {\r\n" + 
-          "  border: 1px solid #dddddd;\r\n" + 
-          "  text-align: left;\r\n" + 
-          "  padding: 8px;\r\n" + 
-          "}\r\n" + 
-          "\r\n" + 
-          "tr:nth-child(even) {\r\n" + 
-          "  background-color: #dddddd;\r\n" + 
-          "}\r\n" + 
-          "</style></head>" +
-          resultTable.toString() );
-      }
-      catch(Exception e){
-        System.out.println("get writer fucked");
-      }
+      
     }
 }
