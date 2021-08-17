@@ -150,8 +150,8 @@ public class farmerdetail extends HttpServlet {
       System.out.println("Executed the following SQL statement for name  "+id+" : ");
       System.out.println(query);
       while(rs.next()){
-        if(rs == null)
-          return;
+        // if(rs == null)
+        //   return;
         resultSetMetaData = rs.getMetaData();
         for (int i = 1; i<=4; i++) {
           resultTable.append("<tr><td>"+resultSetMetaData.getColumnName(i)+"</td><td>"+rs.getString(i)+"</td></tr>");
