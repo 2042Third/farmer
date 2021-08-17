@@ -61,7 +61,7 @@ public class farmerdetail extends HttpServlet {
         "");
 
     
-    get_from_sql( response);
+    get_from_sql(id, response);
     get_pager( request,response);
     response.getWriter().append(formtail);
     //END
@@ -80,10 +80,10 @@ public class farmerdetail extends HttpServlet {
    * Connects to the data base and search for the input,
    * return the result to ResultSet.
    * 
-   * @param page page number
+   * @param id id
    * @param response the response
    * */
-  public void get_from_sql(HttpServletResponse response){
+  public void get_from_sql(String id,HttpServletResponse response){
       Preferences root  = Preferences.userRoot();
       Preferences node = Preferences.userNodeForPackage(this.getClass());
       String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
