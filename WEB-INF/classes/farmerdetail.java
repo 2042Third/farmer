@@ -47,12 +47,12 @@ public class farmerdetail extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
     
-    String id = "";
+    Integer id ;
     String parameters = request.getQueryString();
     if (parameters != null && !parameters.isEmpty()) {
       Map<String,String> parameterMap = splitQuery(parameters);
       if (parameterMap.containsKey("id")) {
-        id = parameterMap.get("id");
+        id = Integer.parseInt(parameterMap.get("id"));
       }
     }
     response.getWriter().append(
@@ -83,9 +83,11 @@ public class farmerdetail extends HttpServlet {
    * @param id id
    * @param response the response
    * */
-  public void get_from_sql(String id,HttpServletResponse response){
+  public void get_from_sql(Integer id,HttpServletResponse response){
       Preferences root  = Preferences.userRoot();
       Preferences node = Preferences.userNodeForPackage(this.getClass());
+      if(id == null)
+        return;
       String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
 
 
