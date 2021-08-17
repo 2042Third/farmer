@@ -99,7 +99,7 @@ public class farmerdetail extends HttpServlet {
         resultTable = new StringBuffer("<table>");
         ResultSetMetaData resultSetMetaData;
         try (PreparedStatement stat = con.prepareStatement(query)) {
-          stat.setString(1, id);
+          stat.setInt(1, id);
           
           try (ResultSet rs = stat.executeQuery()) {
             System.out.println("Executed the following SQL statement for id "+id+" : ");
