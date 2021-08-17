@@ -90,55 +90,107 @@ public class farmerdetail extends HttpServlet {
     String position = "start-up";
     Preferences root  = Preferences.userRoot();
     Preferences node = Preferences.userNodeForPackage(this.getClass());
-    String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
+    String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/farmerdata?useSSL=false");
 
-    Connection con = null;
-    try{
-      con = DriverManager.getConnection(url, "admin", "f3ck");
-      position = "submit review form";
-      String query = "SELECT name, score, review, review1 " + 
-              "FROM farmerdata.reviews WHERE name=?;";
-      // resultTable = new StringBuffer("<table>");
-      ResultSetMetaData resultSetMetaData;
 
-      PreparedStatement stat1 = con.prepareStatement(query);
-      stat1.setString(1, id.toString());
-      response.getWriter().append("<table>");
+      Connection con = null;
+      
+      try
+      {
+        con = DriverManager.getConnection(url, "admin", "f3ck");
+        String query = "SELECT id, name, website,city, county, state, reviewcount, reviewscore " + 
+                "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ? LIMIT 20 OFFSET ? ;";
+        resultTable = new StringBuffer("<table>"+
+        "<tr><th>Name</th><th>City/County</th><th>State</th>" +
+        "<th>Reviews</th><th>website</th><th>Detail</th></tr>");
+        try (PreparedStatement stat = con.prepareStatement(query)) {
+          stat.setString(1, state+"%");
+          stat.setString(2, city+"%");
+          stat.setInt(3, page*20);
+          try (ResultSet rs = stat.executeQuery()) {
+            System.out.println("Executed the following SQL statement:");
+            System.out.println(query);
+            while (rs.next()) {
+              resultTable.append("<tr><td>").append(rs.getString(1)).
+                append("</td><td>").append(rs.getString("city")+", "+rs.getString("county")).
+                append("</td><td>").append(rs.getString("state")).
+                append("</td><td>").append(rs.getString("reviewscore")+"/5 ("+rs.getString("reviewcount")+")").
+                append("</td><td>").append(rs.getString("website")).
+                append("</td><td>").append("<a href=\"/farmer/farmerdetail?id="+rs.getString("id")+"\" >detail</a>").
+                append("</td></tr>");
+            }
+          }
+          resultTable.append("</table>");
+        }
+      }
+      catch (SQLException ex) {
+        for (Throwable t : ex)
+          System.out.println(t.getMessage());
+        System.out.println("Opening connection unsuccessful!");
+      }
+      finally {
+        node.put("MySQLConnection", url);
+        if (con != null) {
+          try {
+            con.close();
+          }
+          catch (SQLException ex) {
+            for (Throwable t : ex)
+              System.out.println(t.getMessage());
+            System.out.println("Closing connection unsuccessful!");
+          }
+        }
+      }
+    
+    
+
+    // Connection con = null;
+    // try{
+    //   con = DriverManager.getConnection(url, "admin", "f3ck");
+    //   position = "submit review form";
+    //   String query = "SELECT name, score, review, review1 " + 
+    //           "FROM farmerdata.reviews WHERE name=?;";
+    //   // resultTable = new StringBuffer("<table>");
+    //   ResultSetMetaData resultSetMetaData;
+
+    //   PreparedStatement stat1 = con.prepareStatement(query);
+    //   stat1.setString(1, id.toString());
+    //   response.getWriter().append("<table>");
         
-      ResultSet rs1 = stat1.executeQuery();
-      //START TABLE
+    //   ResultSet rs1 = stat1.executeQuery();
+    //   //START TABLE
 
-      // System.out.println("Executed the following SQL statement for name  "+id+" : ");
-      System.out.println("Executed the following SQL statement  ");
-      System.out.println(query);
-      while(rs1.next()){
-        resultTable.append("<tr><td>"+rs1.getString("name")+"</td><td>"+rs1.getString("review")+"</td></tr>");
-        resultTable.append("<tr><td>"+"</td><td>"+"</td></tr>");
-      }
-      //END TABLE
-      response.getWriter().append("</table>");
-    }
-    catch (SQLException ex) {
-      for (Throwable t : ex)
-        System.out.println(t.getMessage());
-      System.out.println("Opening connection unsuccessful!");
-    }
-    catch(Exception e){
-      System.out.println("get review fucked at "+position);
-    }
-    finally {
-      node.put("MySQLConnection", url);
-      if (con != null) {
-        try {
-          con.close();
-        }
-        catch (SQLException ex) {
-          for (Throwable t : ex)
-            System.out.println(t.getMessage());
-          System.out.println("Closing connection unsuccessful!");
-        }
-      }
-    }
+    //   // System.out.println("Executed the following SQL statement for name  "+id+" : ");
+    //   System.out.println("Executed the following SQL statement  ");
+    //   System.out.println(query);
+    //   while(rs1.next()){
+    //     resultTable.append("<tr><td>"+rs1.getString("name")+"</td><td>"+rs1.getString("review")+"</td></tr>");
+    //     resultTable.append("<tr><td>"+"</td><td>"+"</td></tr>");
+    //   }
+    //   //END TABLE
+    //   response.getWriter().append("</table>");
+    // }
+    // catch (SQLException ex) {
+    //   for (Throwable t : ex)
+    //     System.out.println(t.getMessage());
+    //   System.out.println("Opening connection unsuccessful!");
+    // }
+    // catch(Exception e){
+    //   System.out.println("get review fucked at "+position);
+    // }
+    // finally {
+    //   node.put("MySQLConnection", url);
+    //   if (con != null) {
+    //     try {
+    //       con.close();
+    //     }
+    //     catch (SQLException ex) {
+    //       for (Throwable t : ex)
+    //         System.out.println(t.getMessage());
+    //       System.out.println("Closing connection unsuccessful!");
+    //     }
+    //   }
+    // }
     
   }
 
