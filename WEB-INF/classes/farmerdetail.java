@@ -147,7 +147,7 @@ public class farmerdetail extends HttpServlet {
       response.getWriter().append("<table>");
       //START TABLE
 
-      System.out.println("Executed the following SQL statement for id "+id+" : ");
+      System.out.println("Executed the following SQL statement for name "+id+" : ");
       System.out.println(query);
       while(rs.next()){
         if(rs == null)
