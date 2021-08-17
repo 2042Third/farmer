@@ -112,7 +112,7 @@ public class farmerdetail extends HttpServlet {
       
       //If there is any message
       if(message.length()!=0 && user_name.length()!=0){
-        query = "INSERT INTO farmerdata.reviews SET name=? , score=? , review=? , review1=? ;";
+        query = "BEGIN; INSERT INTO farmerdata.reviews SET name=? , score=? , review=? , review1=? ; END;";
         position = "after query";
         PreparedStatement stat = con.prepareStatement(query);
         position = "after stat init";
@@ -203,8 +203,8 @@ public class farmerdetail extends HttpServlet {
       try
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
-        String query = "BEGIN; SELECT * " + 
-                "FROM farmerdata.farmers WHERE id=?; END;";
+        String query = "SELECT * " + 
+                "FROM farmerdata.farmers WHERE id=?; ";
         resultTable = new StringBuffer("<table>");
         ResultSetMetaData resultSetMetaData;
         try (PreparedStatement stat = con.prepareStatement(query)) {
