@@ -94,7 +94,7 @@ public class farmerdetail extends HttpServlet {
       try
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
-        String query = "SELECT *" + 
+        String query = "SELECT * " + 
                 "FROM farmerdata.farmers WHERE id=?;";
         resultTable = new StringBuffer("<table>");
         ResultSetMetaData resultSetMetaData;
@@ -102,7 +102,7 @@ public class farmerdetail extends HttpServlet {
           stat.setString(1, id);
           
           try (ResultSet rs = stat.executeQuery()) {
-            System.out.println("Executed the following SQL statement:");
+            System.out.println("Executed the following SQL statement for id "+id+" : ");
             System.out.println(query);
             // while (rs.next()) {
             // for (String i: rs.getArray(0))
