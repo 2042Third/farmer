@@ -324,6 +324,9 @@ public class farmerdetail extends HttpServlet {
           System.out.println(t.getMessage());
         System.out.println("Opening connection unsuccessful!");
       }
+      catch(Exception e) {
+        System.out.println("Bad data for farmer");
+      }
       finally {
         node.put("MySQLConnection", url);
         if (con != null) {
