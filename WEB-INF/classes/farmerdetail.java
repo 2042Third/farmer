@@ -97,11 +97,12 @@ public class farmerdetail extends HttpServlet {
       con = DriverManager.getConnection(url, "admin", "f3ck");
       position = "submit review form";
       String query = "SELECT name, score, review, review1 " + 
-              "FROM farmerdata.reviews ;";
+              "FROM farmerdata.reviews WHERE name=?;";
       // resultTable = new StringBuffer("<table>");
       ResultSetMetaData resultSetMetaData;
+
       PreparedStatement stat1 = con.prepareStatement(query);
-      // stat1.setString(1, id.toString());
+      stat1.setString(1, id.toString());
       response.getWriter().append("<table>");
         
       ResultSet rs1 = stat1.executeQuery();
