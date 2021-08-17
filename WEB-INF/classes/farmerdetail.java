@@ -140,9 +140,7 @@ public class farmerdetail extends HttpServlet {
               "FROM farmerdata.reviews ;";
       // resultTable = new StringBuffer("<table>");
       ResultSetMetaData resultSetMetaData;
-      Connection con1 = null;
-
-      PreparedStatement stat1 = con1.prepareStatement(query);
+      PreparedStatement stat1 = con.prepareStatement(query);
       // stat1.setString(1, id.toString());
       response.getWriter().append("<table>");
         
@@ -158,16 +156,6 @@ public class farmerdetail extends HttpServlet {
       //END TABLE
       response.getWriter().append("</table>");
       
-      if (con1 != null) {
-        try {
-          con1.close();
-        }
-        catch (SQLException ex) {
-          for (Throwable t : ex)
-            System.out.println(t.getMessage());
-          System.out.println("Closing connection unsuccessful!");
-        }
-      }
     }
     catch(Exception e){
       System.out.println("get textarea failure at "+ position);
@@ -184,7 +172,6 @@ public class farmerdetail extends HttpServlet {
           System.out.println("Closing connection unsuccessful!");
         }
       }
-
     }
   }
 
