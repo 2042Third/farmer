@@ -137,11 +137,11 @@ public class farmerdetail extends HttpServlet {
       }
       position = "submit review form";
       query = "SELECT * " + 
-              "FROM farmerdata.reviews WHERE name=?;";
+              "FROM farmerdata.reviews ;";
       // resultTable = new StringBuffer("<table>");
       ResultSetMetaData resultSetMetaData;
       PreparedStatement stat1 = con.prepareStatement(query);
-      stat1.setString(1, id.toString());
+      // stat1.setString(1, id.toString());
         
       ResultSet rs1 = stat1.executeQuery();
       response.getWriter().append("<table>");
