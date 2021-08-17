@@ -152,12 +152,12 @@ public class farmerdetail extends HttpServlet {
       while(rs.next()){
         // if(rs == null)
         //   return;
-        resultSetMetaData = rs.getMetaData();
-        for (int i = 1; i<=4; i++) {
-          resultTable.append("<tr><td>"+rs.getString("name")+"</td><td>"+rs.getString("review")+"</td></tr>");
+        // resultSetMetaData = rs.getMetaData();
+        // for (int i = 1; i<=4; i++) {
+        resultTable.append("<tr><td>"+rs.getString("name")+"</td><td>"+rs.getString("review")+"</td></tr>");
           // System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
             
-        }
+        // }
         resultTable.append("<tr><td>"+"</td><td>"+"</td></tr>");
 
       }
