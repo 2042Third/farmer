@@ -122,7 +122,7 @@ public class farmerdetail extends HttpServlet {
         stat.setString(3, message);
         stat.setString(4, user_name);
         position = "after stat";
-        ResultSet rs = stat.executeUpdate();
+        stat.executeUpdate();
         node.put("MySQLConnection", url);
         if (con != null) {
           try {
