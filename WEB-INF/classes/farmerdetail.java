@@ -98,8 +98,8 @@ public class farmerdetail extends HttpServlet {
       try
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
-        String query = "SELECT name, review " + 
-                "FROM farmerdata.reviews ;";
+        String query = "select * " + 
+                "from farmerdata.reviews ;";
         resultTable = new StringBuffer("<table>"+
         "<tr><th>Name</th><th>City/County</th><th>State</th>" +
         "<th>Reviews</th><th>website</th><th>Detail</th></tr>");
