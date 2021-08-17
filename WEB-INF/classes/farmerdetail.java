@@ -100,7 +100,7 @@ public class farmerdetail extends HttpServlet {
         con = DriverManager.getConnection(url, "admin", "f3ck");
         String query = "select * " + 
                 "from farmerdata.reviews ;";
-        resultTable = new StringBuffer("<table>"+
+        response.getWriter().append("<table>"+
         "<tr><th>Name</th><th>City/County</th><th>State</th>" +
         "<th>Reviews</th><th>website</th><th>Detail</th></tr>");
         try (PreparedStatement stat = con.prepareStatement(query)) {
@@ -115,7 +115,7 @@ public class farmerdetail extends HttpServlet {
                 append("</td></tr>");
             }
           }
-          // resultTable.append("</table>");
+          response.getWriter().append("</table>");
         }
       }
       catch (SQLException ex) {
