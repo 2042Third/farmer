@@ -110,12 +110,12 @@ public class farmerdetail extends HttpServlet {
             System.out.println(query);
             while (rs.next()) {
               System.out.println("Retriving lines of review");
-              resultTable.append("<tr><td>").append(rs.getString(1)).
+              response.getWriter().append("<tr><td>").append(rs.getString(1)).
                 append("</td><td>").append("<a href=\"/farmer/farmerdetail?id="+rs.getString("name")+"\" >detail</a>").
                 append("</td></tr>");
             }
           }
-          resultTable.append("</table>");
+          // resultTable.append("</table>");
         }
       }
       catch (SQLException ex) {
