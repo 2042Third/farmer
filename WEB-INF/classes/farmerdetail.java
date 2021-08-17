@@ -102,6 +102,9 @@ public class farmerdetail extends HttpServlet {
                 "from farmerdata.reviews where name=?;";
         response.getWriter().append("<table>"+
         "");
+        response.getWriter().append("<tr><td>").append("Customer Name").
+                append("</td><td>").append("Customer Review").
+                append("</td></tr>");
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setString(1, id.toString());
           try (ResultSet rs = stat.executeQuery()) {
