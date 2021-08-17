@@ -287,13 +287,14 @@ public class farmerdetail extends HttpServlet {
 
 
       Connection con = null;
+      response.getWriter().append("<h2>"+"Portfolio of farmer "+rs.getString("name")+"</h2>");
       
       try
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
         String query = "select * " + 
                 "from farmerdata.farmers where id=?; ";
-        resultTable = new StringBuffer("<table>");
+        response.getWriter().append("<table>");
         ResultSetMetaData resultSetMetaData;
         try (PreparedStatement stat = con.prepareStatement(query)) {
           stat.setInt(1, id);
@@ -301,24 +302,21 @@ public class farmerdetail extends HttpServlet {
           try (ResultSet rs = stat.executeQuery()) {
             System.out.println("Executed the following SQL statement for id "+id+" : ");
             System.out.println(query);
-            // while (rs.next()) {
-            // for (String i: rs.getArray(0))
-            // }  
+
             rs.next();
             if(rs == null)
               return;
             resultSetMetaData = rs.getMetaData();
             for (int i = 1; i<=58; i++) {
-              resultTable.append("<tr><td>"+resultSetMetaData.getColumnName(i)+"</td><td>"+rs.getString(i)+"</td></tr>");
+              response.getWriter().append("<tr><td>"+resultSetMetaData.getColumnName(i)+"</td><td>"+rs.getString(i)+"</td></tr>");
               System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
                 
             }
-            response.getWriter().append("<h2>"+"Portfolio of farmer "+rs.getString("name")+"</h2>");
           }
           catch(Exception e){
             System.out.println("get writer fucked");
           }
-          resultTable.append("</table>");
+          response.getWriter().append("</table>");
         }
       }
       catch (SQLException ex) {
