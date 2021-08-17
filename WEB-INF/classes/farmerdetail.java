@@ -113,7 +113,7 @@ public class farmerdetail extends HttpServlet {
             if(rs == null)
               return;
             resultSetMetaData = rs.getMetaData();
-            for (int i = 1; i<=30; i++) {
+            for (int i = 1; i<=58; i++) {
               resultTable.append("<tr><td>"+resultSetMetaData.getColumnName(i)+"</td><td>"+rs.getString(i)+"</td></tr>");
               System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
                 
