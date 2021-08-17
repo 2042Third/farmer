@@ -98,25 +98,19 @@ public class farmerdetail extends HttpServlet {
       try
       {
         con = DriverManager.getConnection(url, "admin", "f3ck");
-        String query = "SELECT id, name, website,city, county, state, reviewcount, reviewscore " + 
-                "FROM farmerdata.farmers WHERE city LIKE ? AND state LIKE ? LIMIT 20 OFFSET ? ;";
+        String query = "SELECT name, review " + 
+                "FROM farmerdata.reviews ;";
         resultTable = new StringBuffer("<table>"+
         "<tr><th>Name</th><th>City/County</th><th>State</th>" +
         "<th>Reviews</th><th>website</th><th>Detail</th></tr>");
         try (PreparedStatement stat = con.prepareStatement(query)) {
-          stat.setString(1, state+"%");
-          stat.setString(2, city+"%");
-          stat.setInt(3, page*20);
+          
           try (ResultSet rs = stat.executeQuery()) {
             System.out.println("Executed the following SQL statement:");
             System.out.println(query);
             while (rs.next()) {
               resultTable.append("<tr><td>").append(rs.getString(1)).
-                append("</td><td>").append(rs.getString("city")+", "+rs.getString("county")).
-                append("</td><td>").append(rs.getString("state")).
-                append("</td><td>").append(rs.getString("reviewscore")+"/5 ("+rs.getString("reviewcount")+")").
-                append("</td><td>").append(rs.getString("website")).
-                append("</td><td>").append("<a href=\"/farmer/farmerdetail?id="+rs.getString("id")+"\" >detail</a>").
+                append("</td><td>").append("<a href=\"/farmer/farmerdetail?id="+rs.getString("name")+"\" >detail</a>").
                 append("</td></tr>");
             }
           }
@@ -141,7 +135,7 @@ public class farmerdetail extends HttpServlet {
           }
         }
       }
-    
+
     
 
     // Connection con = null;
