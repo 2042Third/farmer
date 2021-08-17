@@ -140,26 +140,20 @@ public class farmerdetail extends HttpServlet {
               "FROM farmerdata.reviews ;";
       // resultTable = new StringBuffer("<table>");
       ResultSetMetaData resultSetMetaData;
-      PreparedStatement stat1 = con.prepareStatement(query);
+      Connection con1 = null;
+
+      PreparedStatement stat1 = con1.prepareStatement(query);
       // stat1.setString(1, id.toString());
+      response.getWriter().append("<table>");
         
       ResultSet rs1 = stat1.executeQuery();
-      response.getWriter().append("<table>");
       //START TABLE
 
       System.out.println("Executed the following SQL statement for name  "+id+" : ");
       System.out.println(query);
       while(rs1.next()){
-        // if(rs == null)
-        //   return;
-        // resultSetMetaData = rs.getMetaData();
-        // for (int i = 1; i<=4; i++) {
         resultTable.append("<tr><td>"+rs1.getString("name")+"</td><td>"+rs1.getString("review")+"</td></tr>");
-          // System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
-            
-        // }
         resultTable.append("<tr><td>"+"</td><td>"+"</td></tr>");
-
       }
       //END TABLE
       response.getWriter().append("</table>");
@@ -173,6 +167,17 @@ public class farmerdetail extends HttpServlet {
       if (con != null) {
         try {
           con.close();
+        }
+        catch (SQLException ex) {
+          for (Throwable t : ex)
+            System.out.println(t.getMessage());
+          System.out.println("Closing connection unsuccessful!");
+        }
+      }
+
+      if (con1 != null) {
+        try {
+          con1.close();
         }
         catch (SQLException ex) {
           for (Throwable t : ex)
