@@ -96,6 +96,8 @@ public class farmerdetail extends HttpServlet {
     response.getWriter().append("<br><br>");
     response.getWriter().append("<input type=\"submit\">");
     response.getWriter().append("</form>");
+    Preferences root  = Preferences.userRoot();
+    Preferences node = Preferences.userNodeForPackage(this.getClass());
     String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
     Connection con = null;
     
