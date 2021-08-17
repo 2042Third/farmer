@@ -48,18 +48,24 @@ public class farmerdetail extends HttpServlet {
     // TODO Auto-generated method stub
     
     Integer id =-1;
-    String parameters = request.getQueryString();
+    String parameters = request.getQueryString(), message="", user_name="";
     if (parameters != null && !parameters.isEmpty()) {
       Map<String,String> parameterMap = splitQuery(parameters);
       if (parameterMap.containsKey("id")) {
         id = Integer.parseInt(parameterMap.get("id"));
+      }
+      if (parameterMap.containsKey("message")) {
+        message = parameterMap.get("message");
+      }
+      if (parameterMap.containsKey("user_name")) {
+        user_name = parameterMap.get("user_name");
       }
     }
     response.getWriter().append(
       "<html><title>Farmer detail</title><body>" +
         "");
 
-    
+    get_textarea(id,message,user_name,response);
     get_from_sql(id, response);
     get_pager( request,response);
     response.getWriter().append(formtail);
@@ -72,6 +78,89 @@ public class farmerdetail extends HttpServlet {
    * */
   public void get_pager(HttpServletRequest request ,HttpServletResponse response){
     
+  }
+
+  /**
+   * Get the text area of a farmer
+   * @param id id of the farmer
+   * @param message the input review
+   * @param user_name the name of the user who wrote reviews
+   * @param response http get response object
+   * */
+  public void get_textarea(Integer id, String message, String user_name, HttpServletResponse response){
+
+    response.getWriter().append("<p>Write a review:</p>");
+    response.getWriter().append("<form>");
+    response.getWriter().append("<textarea name=\"user_name\" ></textarea>");
+    response.getWriter().append("<textarea name=\"message\" rows=\"10\" cols=\"30\"></textarea>");
+    response.getWriter().append("<br><br>");
+    response.getWriter().append("<input type=\"submit\">");
+    response.getWriter().append("</form>");
+    String url = node.get("MySQLConnection", "jdbc:mysql://localhost:9234/advjava?useSSL=false");
+    Connection con = null;
+    
+    try{
+      con = DriverManager.getConnection(url, "admin", "f3ck");
+      String query;
+      String position = "message processing";
+      //If there is any message
+      if(message.length()!=0 && user_name.length()!=0){
+        query = "INSERT INTO farmerdata.farmers (name, score, review, review1) " + 
+            "VALUES ( ? , ? , ? , ? );";
+        PreparedStatement stat = con.prepareStatement(query);
+        stat.setString(1, id+"");
+        stat.setString(2, "5");
+        stat.setString(3, message);
+        stat.setString(4, user_name);
+        ResultSet rs = stat.executeQuery();
+
+      }
+      position = "submit review form";
+      query = "SELECT * " + 
+              "FROM farmerdata.farmers WHERE id=?;";
+      // resultTable = new StringBuffer("<table>");
+      ResultSetMetaData resultSetMetaData;
+      PreparedStatement stat = con.prepareStatement(query);
+      stat.setInt(1, id);
+        
+      ResultSet rs = stat.executeQuery();
+      response.getWriter().append("<table>");
+      //START TABLE
+
+      System.out.println("Executed the following SQL statement for id "+id+" : ");
+      System.out.println(query);
+      while(rs.next()){
+        if(rs == null)
+          return;
+        resultSetMetaData = rs.getMetaData();
+        for (int i = 1; i<=58; i++) {
+          resultTable.append("<tr><td>"+resultSetMetaData.getColumnName(i)+"</td><td>"+rs.getString(i)+"</td></tr>");
+          System.out.println(resultSetMetaData.getColumnName(i)+" %% "+rs.getString(i));
+            
+        }
+        resultTable.append("<tr><td>"+"</td><td>"+"</td></tr>");
+
+      }
+      //END TABLE
+      response.getWriter().append("</table>");
+      
+    }
+    catch(Exception e){
+      System.out.println("get textarea failure at "+ position);
+    }
+    finally{
+      node.put("MySQLConnection", url);
+      if (con != null) {
+        try {
+          con.close();
+        }
+        catch (SQLException ex) {
+          for (Throwable t : ex)
+            System.out.println(t.getMessage());
+          System.out.println("Closing connection unsuccessful!");
+        }
+      }
+    }
   }
 
   /**
